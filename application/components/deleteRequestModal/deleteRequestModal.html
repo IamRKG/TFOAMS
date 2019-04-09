@@ -1,0 +1,25 @@
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true" ng-click="deleteRequestModalInstanceCtrl.reject()">&times;</button>
+    <h1 class="modal-title">{{'createRequest.deleteRequestOverlay.title' | translate}}</h1>
+</div>
+
+<div class="modal-body">
+
+    <p>{{'createRequest.deleteRequestOverlay.info' | translate}}</p>
+
+
+
+</div>
+<div class="modal-footer form-actions">
+    <button id="send-email" type="button" class="btn btn-primary" ng-click="deleteRequestModalInstanceCtrl.resolve()">
+        {{'createRequest.deleteRequest'
+        | translate}}
+    </button>
+    <button id="cancel" type="button" class="btn btn-default" ng-click="deleteRequestModalInstanceCtrl.reject()">
+        {{'createRequest.selectDealerModel.cancel'
+        | translate}}
+    </button>
+
+</div>

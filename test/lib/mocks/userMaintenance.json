@@ -1,0 +1,139 @@
+[
+  {
+    "userRole":"SAD",
+	"roleOptions":[{
+		"value":"SAD",
+		"name":"System Admin",
+		"country":[
+			{"value":"0", "code":"All",
+			"territory":[
+			{"value":"0", "code":"SAD-Atlanta - Chicago"},
+			{"value":"1", "code":"SAD-Columbia - Charleston"},
+			{"value":"2", "code":"SAD-Detroit - Lansing"}			
+			]
+			}
+			]
+		
+		},
+		{
+		"value":"RAD",
+		"name":"Regional Admin",
+		"country":[
+			{"value":"0", "code":"USA",
+				"territory":[
+					{"value":"0", "code":"RAD-USA_Atlanta - Chicago"},
+					{"value":"1", "code":"RAD-USA_Columbia - Charleston"},
+					{"value":"2", "code":"RAD-USA_Detroit - Lansing"},
+					{"value":"3", "code":"RAD-USA_Miami - Orlando"}
+					]	
+			},
+			{"value":"1", "code":"AUS",
+				"territory":[
+					{"value":"0", "code":"RAD-AUS_Atlanta - Chicago"},
+					{"value":"1", "code":"RAD-AUS_Columbia - Charleston"}
+					]	
+			},
+			{"value":"2", "code":"CAN",
+				"territory":[
+					{"value":"0", "code":"RAD-CAN_Atlanta - Chicago"},
+					{"value":"1", "code":"RAD-CAN_Columbia - Charleston"}
+					]	
+			}
+			]
+				
+		}
+	]  
+  },
+{
+      "roleOpt": [
+         {
+            "value": "Field Service Engineer",
+            "id": 1
+         },
+         {
+            "value": "General User",
+            "id": 2
+         },
+         {
+            "value": "Read Only",
+            "id": 3
+         },
+         {
+            "value": "Regional Admin",
+            "id": 4
+         },
+         {
+            "value": "Other Resource",
+            "id": 5
+         },
+         {
+            "value": "Primary Dispatcher",
+            "id": 6
+         },
+         {
+            "value": "Secondary Dispatcher",
+            "id": 7
+         }
+      ],
+      "territory": [
+         {
+            "name": "Atlanta - Chicago",
+            "id": 1
+         },
+         {
+            "name": "Columbia - Charleston",
+            "id": 2
+         },
+         {
+            "name": "Dallas - Houston",
+            "id": 3
+         },
+         {
+            "name": "Detroit - Lansing",
+            "id": 4
+         },
+         {
+            "name": "Miami - Orlando",
+            "id": 5
+         },
+         {
+            "name": "Raleigh - Durham",
+            "id": 6
+         },
+         {
+            "name": "San Francisco - LA",
+            "id": 7
+         }
+      ],
+      "facingRegion": [
+         {
+            "name": "C1 - Dallas",
+            "id": 1
+         },
+         {
+            "name": "C2 - Houston",
+            "id": 2
+         },
+         {
+            "name": "C3 - Memphis",
+            "id": 3
+         },
+         {
+            "name": "G2 - Detroit",
+            "id": 4
+         },
+         {
+            "name": "N2 - Boston",
+            "id": 5
+         },
+         {
+            "name": "W4 - Denver",
+            "id": 6
+         },
+         {
+            "name": "San Francisco - LA",
+            "id": 7
+         }
+      ]
+   }  
+]

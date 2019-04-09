@@ -1,0 +1,10 @@
+{
+	"application": {
+		"title": "German - FEMAR (Front-End MVVM with Angular and Rest)"
+	},
+	"booking": {
+		"listBooking": {
+			"title": "German - List Booking"
+		}
+	}
+}

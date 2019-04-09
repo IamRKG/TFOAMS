@@ -1,0 +1,88 @@
+  <alert ng-repeat="alert in searchRequestsCtrl.onlyVisibleMessages" type="{{alert.type}}" close="searchRequestsCtrl.close()">{{alert.msg}}</alert>
+  <form class="" role="form" name="searchReqest" novalidate>
+<h1>{{'searchRequests.title' | translate}}</h1>
+<accordion>
+  <accordion-group class="panel panel-default">
+    <accordion-heading class="h2"> <span ng-click="show = !show">{{'searchRequests.title2' | translate}}</span> <a ng-click="show = !show" class="pull-right" ng-show="!show">{{'searchRequests.show' | translate}}</a><a class="pull-right" ng-click="show = !show" ng-show="show">Hide</a> </accordion-heading>
+    
+    <div class="container-fluid">
+    <p>Search by selecting a search category then entering your search criteria.</p>
+    <div class="row">
+      <div class="form-group col-sm-6 col-xs-12" ng-class="{'has-error': searchRequestsCtrl.isFormSubmitted && searchReqest.selectCategory.$invalid}">
+        <label for="selectCategory" class="control-label"><abbr title="Required">*</abbr>{{'searchRequests.selectCategory' | translate}}</label>
+        <select class="form-control" name="selectCategory" id="selectCategory" ng-options="c.value as c.name for c in searchRequestsCtrl.category" ng-model="searchRequestsCtrl.selectCategory" required ng-change="searchRequestsCtrl.addPattern();">
+        <option value="">Select</option>
+        </select>
+        <div><span class="label label-danger" ng-show="searchRequestsCtrl.isFormSubmitted && searchReqest.selectCategory.$invalid">
+        <span class="glyphicon glyphicon-remove-circle"></span> <span class="label-text">{{'searchRequests.isRequiredPlease' | translate}}   {{'searchRequests.selectCategory' | translate}}</span></span>
+                    </div>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12" ng-class="{'has-error': searchRequestsCtrl.isFormSubmitted && searchReqest.enterSearchCriteria.$invalid}">
+        <label for="enterSearchCriteria" class="control-label"><abbr title="Required">*</abbr>{{'searchRequests.enterSearchCriteria' | translate}}</label>
+       
+        <input type="text" class="form-control" placeholder="Enter your search criteria here" id="enterSearchCriteria" name="enterSearchCriteria" ng-model="searchRequestsCtrl.enterSearchCriteria" required ng-pattern="onlyNum">
+      
+      
+         <div  ><span class="label label-danger" ng-show="searchRequestsCtrl.isFormSubmitted && searchReqest.enterSearchCriteria.$invalid">
+        <span class="error" ng-show="searchReqest.enterSearchCriteria.$error.required">
+        <span class="glyphicon glyphicon-remove-circle"></span> <span class="label-text">{{'searchRequests.isRequiredPlease' | translate}}   {{'searchRequests.enterSearchCriteria' | translate}}</span></span>
+                   <span class="error" ng-show="searchReqest.enterSearchCriteria.$error.pattern">
+ 		                          <span class="glyphicon glyphicon-remove-circle"></span>
+            						<span class="label-text">{{'searchRequests.isRequiredPlease' | translate}} {{'searchRequests.pattern' | translate}}</span>
+    						   </span>
+                    </span></div>  
+         <span id="helpBlock" class="help-block">{{'searchRequests.instructions' | translate}}</span>
+       
+        </div>
+
+      <div class="form-group col-sm-6 col-xs-12">
+        <label for="requestType" class="control-label">{{'searchRequests.requestType' | translate}}</label>
+        <select class="form-control" name="requestType" id="requestType" ng-model="searchRequestsCtrl.selectRequestType" ng-options="c.code as c.description for c in searchRequestsCtrl.searchRequestType.requestTypeList" >
+        <option value="">Select</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-xs-12">
+        <label for="status" class="control-label">{{'searchRequests.status' | translate}}</label>
+        <select class="form-control" name="status" id="status" ng-options="s.id as s.name for s in searchRequestsCtrl.status" ng-model="searchRequestsCtrl.selectStatus" required >
+        
+      	  <option value="">Select</option>
+        
+        </select>
+        </div>
+    </div>
+    </div>
+   <div class="text-center form-group row">
+        <div class="row">
+           <div class="col-xs-6 text-right">
+                 <button type="button" class="btn btn-primary" title="Search" id="search" ng-click="searchRequestsCtrl.searchRequest()">{{'buttons.search' | translate}}</button>
+            </div>
+           <div class="col-xs-6 text-left">
+               <button type="button" class="btn btn-secondary" title="Cancel" id="cancel" ui-sref="home">{{'buttons.cancel' | translate}}</button>
+            </div>
+        </div>
+   </div>
+    
+  </accordion-group>
+</accordion>
+   <h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+	<div class="table-responsive" datatable="{{searchRequestsCtrl.searchTable.overrideOptions}}" columns="searchRequestsCtrl.searchTable.columns" column-defs="{{searchRequestsCtrl.searchTable.columnDefs}}" data="searchRequestsCtrl.searchResult" >
+	
+	<table id="searchTable" class="table table-bordered table-striped" summary="Tracking #,Dealer,Vehicle,Details">
+        <caption class="hidden">
+        {{'reports.myAssignedRequests' | translate}}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{'reports.trackingNumber' | translate}}</th>
+            <th scope="col">{{'reports.dealerName' | translate}}</th>
+            <th ng-show="applicationCtrl.userInformation.jobRole != 'SAD' && applicationCtrl.userInformation.country == 'USA' || applicationCtrl.userInformation.jobRole != 'SAD' && applicationCtrl.userInformation.country == 'CAN'" scope="col">{{'reports.FMC360Case' | translate}}</th>
+            <th scope="col">{{'reports.modelYearVehicle' | translate}}</th>
+			<th scope="col">{{'reports.details' | translate}}</th>
+          </tr>
+        </thead>
+      </table>
+	
+	</div>
+	
+
+</form>

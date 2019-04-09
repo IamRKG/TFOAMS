@@ -1,0 +1,87 @@
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true" ng-click="emailSummaryModalInstanceCtrl.reject()">&times;</button>
+    <h1 class="modal-title">{{'createRequest.emailSummary' | translate}}</h1>
+</div>
+
+<div class="modal-body">
+
+
+    <form class="well" role="form" name="emailSummary" novalidate>
+        <div class="row">
+            <div class="form-group" ng-class="{'has-error': emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.sendTo.$invalid}">
+                <label for="email-to" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.emailSummaryOverlay.sendEmailTo'
+                    | translate}}
+                </label>
+                <input id="email-to" type="text" multiple name="sendTo" placeholder="ex. smith@ford.com"
+                       class="form-control" ng-model="emailSummaryModalInstanceCtrl.emailTo" required multiple-emails>
+
+                <div class="note">
+                    {{'createRequest.emailSummaryOverlay.sendToInfo' | translate}}
+                </div>
+                 <span class="label label-danger"
+                       ng-show="emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.sendTo.$error.required"><span
+                         class="glyphicon glyphicon-remove-circle"></span><span
+                         class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.emailSummaryOverlay.sendToError' | translate}}</span>
+                 </span>
+                <span class="label label-danger"
+                      ng-show="emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.sendTo.$error.EmailId"><span
+                        class="glyphicon glyphicon-remove-circle"></span><span
+                        class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.emailSummaryOverlay.sendCcInValid' | translate}}</span>
+                 </span>
+
+            </div>
+            <div class="form-group" ng-class="{'has-error': emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.emailCc.$invalid}">
+                <label for="email-Cc" class="control-label">{{'createRequest.emailSummaryOverlay.CC'
+                    | translate}}
+                </label> <input id="email-cc" type="text" name="emailCc" placeholder="ex. smith@ford.com"
+                                class="form-control" ng-model="emailSummaryModalInstanceCtrl.emailCc" multiple-emails>
+                <span class="label label-danger"
+                      ng-show="emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.emailCc.$invalid"><span
+                        class="glyphicon glyphicon-remove-circle"></span><span
+                        class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.emailSummaryOverlay.sendCcInValid' | translate}}</span></span>
+            </div>
+            <div class="form-group" ng-class="{'has-error': emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.emailSubject.$invalid}">
+                <label for="email-subject" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.emailSummaryOverlay.subject'
+                    | translate}}
+                </label> <input id="email-subject" type="text" name="emailSubject" placeholder="Email Summary"
+                                class="form-control" ng-model="emailSummaryModalInstanceCtrl.emailSubject" required>
+                 <span class="label label-danger"
+                       ng-show="emailSummaryModalInstanceCtrl.isFormSubmitted && emailSummary.emailSubject.$invalid"><span
+                         class="glyphicon glyphicon-remove-circle"></span><span
+                         class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.emailSummaryOverlay.subject' | translate}}</span></span>
+            </div>
+            <div class="form-group">
+                <label for="email-comments" class="control-label"> {{'createRequest.emailSummaryOverlay.additionalComments'
+                    | translate}}
+                </label>
+                <textarea id="email-comments" placeholder="Enter your comments here"
+                          class="form-control" ng-model="emailSummaryModalInstanceCtrl.emailComments"></textarea>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+<div class="modal-footer form-actions">
+    <button ng-if="emailSummaryModalInstanceCtrl.userAction=='emailSummary'" id="send-email" type="button" class="btn btn-primary" ng-click="emailSummaryModalInstanceCtrl.emailSummary(emailSummary)">
+        {{'createRequest.emailSummaryOverlay.sendEmail'
+        | translate}}
+    </button>
+    <button ng-if="emailSummaryModalInstanceCtrl.userAction=='sendcontact'" id="email-contact" type="button" class="btn btn-primary" ng-click="emailSummaryModalInstanceCtrl.emailSummary(emailSummary)">
+        {{'createRequest.emailSummaryOverlay.ok'
+        | translate}}
+    </button>
+    <button id="cancel" type="button" class="btn btn-default" ng-click="emailSummaryModalInstanceCtrl.reject()">
+        {{'createRequest.selectDealerModel.cancel'
+        | translate}}
+    </button>
+
+</div>

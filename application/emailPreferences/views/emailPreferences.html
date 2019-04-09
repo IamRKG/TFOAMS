@@ -1,0 +1,107 @@
+<alert ng-repeat="alert in emailPreferencesCtrl.onlyVisibleMessages" type="{{alert.type}}" close="emailPreferencesCtrl.close()" dismiss-on-timeout='3000'>{{alert.msg}}</alert>
+	<h2>{{'emailPreferences.title' | translate}}</h2>
+	<p>{{'emailPreferences.instructions' | translate}}</p>
+	<div class="panel panel-default no-borders no-bg">
+		<div class="panel-heading">
+			<h3>{{'emailPreferences.sendMeEmailsWhenRequests' | translate}}</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailCreated"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.created' | translate}}
+						</label>
+						
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailSaved"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.saved' | translate}}
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailSubmited"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.submitted' | translate}}
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailAssigned"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.assigned' | translate}}
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailReturned"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.returnedToDispatcher' | translate}}
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailClosed"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.closed' | translate}}
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="checkbox">
+						<label class="no-bg-label"> <input type="checkbox"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailDeleted"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.deleted' | translate}}
+						</label>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<div class="checkbox">
+						<label class="no-bg-label" for="sendMeAnyAutomatedEmails">
+							<input type="checkbox" id="sendMeAnyAutomatedEmails"
+							ng-model="emailPreferencesCtrl.emailPreferences.emailNoAuto"
+							ng-true-value="Y" ng-false-value="N">
+							{{'emailPreferences.doNotsendAutomatedEmailsWhenGeneratedByMyOwnActions'
+							| translate}}
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+         
+   <div class="text-center form-group row">
+        <div class="row">
+           <div class="col-xs-6 text-right">
+             <button type="button" class="btn btn-primary" title="Save Changes"
+				id="saveChanges" ng-click="emailPreferencesCtrl.saveDetails();">{{'buttons.saveChanges' | translate}}</button>
+           </div>
+           <div class="col-xs-6 text-left">
+                 <button type="button" class="btn btn-secondary" title="Cancel"
+				id="cancel" ui-sref="home">{{'buttons.cancel' | translate}}</button>
+            </div>
+        </div>
+   </div>
+

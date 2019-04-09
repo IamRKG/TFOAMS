@@ -1,0 +1,86 @@
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true" ng-click="selectDealerModalInstanceCtrl.reject()">&times;</button>
+    <h1 class="modal-title">{{'createRequest.selectDealerModel.title' | translate}}</h1>
+</div>
+
+<div class="modal-body">
+
+    <p>{{'createRequest.selectDealerModel.info' | translate}}</p>
+    <alert ng-repeat="alert in selectDealerModalInstanceCtrl.onlyVisibleMessages" type="{{alert.type}}"
+           close="selectDealerModalInstanceCtrl.close()">{{alert.msg}}
+    </alert>
+    <form class="well" role="form" name="selectDealer" novalidate>
+        <div class="row">
+            <div class="form-group" ng-class="{'has-error': selectDealerModalInstanceCtrl.isFormSubmitted && (selectDealer.paCode.$invalid&&selectDealer.dealerName.$invalid)}">
+
+               <span class="label label-danger"
+                     ng-show="selectDealerModalInstanceCtrl.isFormSubmitted && (selectDealer.paCode.$invalid&&selectDealer.dealerName.$invalid)"><span
+                       class="glyphicon glyphicon-remove-circle"></span><span
+                       class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.selectDealerModel.PACode' | translate}} or {{'createRequest.selectDealerModel.dealershipName' | translate}}</span></span>
+
+
+
+            <div class="form-group">
+
+                <label for="PA-code" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.selectDealerModel.PACode'
+                    | translate}}
+                </label>
+                <input id="PA-code" name="paCode" type="text" placeholder="ex. 123456"
+                       class="form-control" ng-model="selectDealerModalInstanceCtrl.selectedPACode" required>
+
+
+            </div>
+            <div class="form-group">
+                <label for="dealership-name" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.selectDealerModel.dealershipName'
+                    | translate}}
+                </label> <input id="dealership-name" name="dealerName" type="text" placeholder="ex. Smith Ford"
+                                class="form-control" ng-model="selectDealerModalInstanceCtrl.dealershipName" required>
+
+
+            </div>
+            </div>
+            <div class="form-group text-center">
+                <button id="search" type="button" class="btn btn-primary"
+                        ng-click="selectDealerModalInstanceCtrl.searchDealer(selectDealer)">
+                    {{'createRequest.selectDealerModel.search'
+                    | translate}}
+                </button>
+            </div>
+        </div>
+    </form>
+
+<div id="search-results" ng-if="selectDealerModalInstanceCtrl.searchResults">
+<h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+    <div class="table-responsive" datatable="{{selectDealerModalInstanceCtrl.searchResultsTable.overrideOptions}}" columns="selectDealerModalInstanceCtrl.searchResultsTable.columns"
+         column-defs="{{selectDealerModalInstanceCtrl.searchResultsTable.columnDefs}}" data="selectDealerModalInstanceCtrl.searchResults" >
+
+        <table class="table table-bordered table-striped" summary="PACode,Dealer,City,State">
+            <caption class="hidden">
+                {{'reports.myAssignedRequests' | translate}}
+            </caption>
+            <thead>
+            <tr>
+                <th scope="col">{{'createRequest.selectDealerModel.PACode' | translate}}</th>
+                <th scope="col">{{'createRequest.selectDealerModel.dealer' | translate}}</th>
+                <th scope="col">{{'createRequest.selectDealerModel.city' | translate}}</th>
+                <th scope="col">{{'createRequest.selectDealerModel.state' | translate}}</th>
+            </tr>
+            </thead>
+        </table>
+
+    </div>
+
+</div>
+</div>
+<div class="modal-footer form-actions">
+    <button id="cancel" type="button" class="btn btn-default" ng-click="selectDealerModalInstanceCtrl.reject()">
+        {{'createRequest.selectDealerModel.cancel'
+        | translate}}
+    </button>
+
+</div>

@@ -1,0 +1,815 @@
+/********************************* [START] Fonts *********************************/
+/* This CSS resource incorporates links to font software which is the valuable copyrighted property of WebType LLC, The Font Bureau, Ascender Corporation and/or their suppliers. You may not attempt to copy, install, redistribute, convert, modify or reverse engineer this font software. Please contact WebType with any questions: http://www.webtype.com */
+@font-face {	/* Antenna Bold */
+	font-family: Antenna;
+	src: url("../fonts/Antenna-Bold/85bf2123-24cb-4bfd-a720-efe63c68c84d-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Bold/85bf2123-24cb-4bfd-a720-efe63c68c84d-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Bold/85bf2123-24cb-4bfd-a720-efe63c68c84d-3.woff") format('woff'),
+		url("../fonts/Antenna-Bold/85bf2123-24cb-4bfd-a720-efe63c68c84d-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Bold/85bf2123-24cb-4bfd-a720-efe63c68c84d-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {	/* Antenna Medium */
+	font-family: Antenna;
+	src: url("../fonts/Antenna-Medium/c03da8b6-e888-4718-9c24-e25cc55c95d7-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Medium/c03da8b6-e888-4718-9c24-e25cc55c95d7-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Medium/c03da8b6-e888-4718-9c24-e25cc55c95d7-3.woff") format('woff'),
+		url("../fonts/Antenna-Medium/c03da8b6-e888-4718-9c24-e25cc55c95d7-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Medium/c03da8b6-e888-4718-9c24-e25cc55c95d7-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 500;
+}
+@font-face {	/* Antenna Regular */
+	font-family: Antenna;
+	src: url("../fonts/Antenna-Regular/a249ec5c-51a0-4581-a866-722ded577e7d-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Regular/a249ec5c-51a0-4581-a866-722ded577e7d-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Regular/a249ec5c-51a0-4581-a866-722ded577e7d-3.woff") format('woff'),
+		url("../fonts/Antenna-Regular/a249ec5c-51a0-4581-a866-722ded577e7d-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Regular/a249ec5c-51a0-4581-a866-722ded577e7d-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 400;
+}
+@font-face {	/* Antenna Condensed Bold */
+	font-family: AntennaCond;
+	src: url("../fonts/Antenna-Condensed-Bold/11003427-bdd6-432a-9edc-cdbe214ee6c8-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Condensed-Bold/11003427-bdd6-432a-9edc-cdbe214ee6c8-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Condensed-Bold/11003427-bdd6-432a-9edc-cdbe214ee6c8-3.woff") format('woff'),
+		url("../fonts/Antenna-Condensed-Bold/11003427-bdd6-432a-9edc-cdbe214ee6c8-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Condensed-Bold/11003427-bdd6-432a-9edc-cdbe214ee6c8-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {	/* Antenna Condensed Medium */
+	font-family: AntennaCond;
+	src: url("../fonts/Antenna-Condensed-Medium/5c6f660d-245c-414f-afcb-9d45671d7abf-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Condensed-Medium/5c6f660d-245c-414f-afcb-9d45671d7abf-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Condensed-Medium/5c6f660d-245c-414f-afcb-9d45671d7abf-3.woff") format('woff'),
+		url("../fonts/Antenna-Condensed-Medium/5c6f660d-245c-414f-afcb-9d45671d7abf-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Condensed-Medium/5c6f660d-245c-414f-afcb-9d45671d7abf-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 500;
+}
+@font-face {	/* Antenna Condensed Regular */
+	font-family: AntennaCond;
+	src: url("../fonts/Antenna-Condensed-Regular/9008712d-ca0a-4cf7-b0ba-49bd89ac008c-2.eot"); 
+	src: local('☺'),
+		url("../fonts/Antenna-Condensed-Regular/9008712d-ca0a-4cf7-b0ba-49bd89ac008c-2.eot#iefix") format('embedded-opentype'),
+		url("../fonts/Antenna-Condensed-Regular/9008712d-ca0a-4cf7-b0ba-49bd89ac008c-3.woff") format('woff'),
+		url("../fonts/Antenna-Condensed-Regular/9008712d-ca0a-4cf7-b0ba-49bd89ac008c-1.ttf") format('truetype'),
+		url("../fonts/Antenna-Condensed-Regular/9008712d-ca0a-4cf7-b0ba-49bd89ac008c-4.svg#WebSymbolsRegular") format('svg');
+	font-style: normal;
+	font-weight: 400;
+}
+/********************************* [END] Fonts *********************************/
+
+/* Colour Palette
+-------------------------------------------------- */
+/*Primary Colours*/
+.ford-blue {
+	color: #003478;
+}
+.slate {
+	color: #425968;
+}
+.slate-screen {
+	color: #91a4b1;
+}
+.fourty-black {
+	color: #7f7c7c;
+}
+.white {
+	color: #fff;
+}
+/*Secondary Colours*/
+.light-grey {
+	color: #b3b3b3;
+}
+.dark-grey {
+	color: #333;
+}
+.highlight {
+	color: #2d96cd;
+}
+
+/* Base Layout styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+	font-size: 75%;
+}
+
+body {
+	/* Sticky Footer Settings => Set the bottom margin here */
+	margin-bottom: 6em;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background-color: #f4f4f4;
+	font-size: 1em;
+	line-height: 1.25;
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+	body {
+		line-height: 1.375;
+	}
+}
+@media (min-width: 1200px) {
+}
+@media print {
+	body {
+		font-size: 12pt;
+		line-height: 21pt;
+	}
+}
+
+#header {
+
+}
+
+#footer {
+	/* Sticky Footer Settings => Set the height of the footer here to be the same as the body bottom margin 
+		plus the footer top and bottom padding */
+	height: 6em;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #DDDDDD;
+	background-image: -moz-linear-gradient(top, #DDDDDD 0%, #FFFFFF 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DDDDDD), color-stop(100%,#FFFFFF));
+	background-image: -webkit-linear-gradient(top, #DDDDDD 0%,#FFFFFF 100%);
+	background-image: -o-linear-gradient(top, #DDDDDD 0%,#FFFFFF 100%);
+	background-image: -ms-linear-gradient(top, #DDDDDD 0%,#FFFFFF 100%);
+	background-image: linear-gradient(to bottom, #DDDDDD 0%,#FFFFFF 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#DDDDDD', endColorstr='#FFFFFF',GradientType=0 );
+	padding: 1em 0;
+	text-align: center;
+}
+
+#content {
+	padding-bottom: 1em;
+}
+
+/* Grid Styles
+-------------------------------------------------- */
+.row {
+	margin-bottom: 0.25em;
+}
+
+/* Typography styles
+-------------------------------------------------- */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: AntennaCond, Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	margin-top: 0;
+}
+h5, h6, .h5, .h6 {
+	font-family: Antenna, Arial, Helvetica, sans-serif;
+}
+h1, .h1 {
+	font-weight: 500;
+	font-size: 2.666rem;
+}
+@media (min-width: 768px) {
+	.app-branding .media-heading {
+		font-size: 2.000rem;
+	}
+}
+/*Tablet (landscape)*/
+@media (min-width: 992px) {
+	.app-branding .media-heading {
+		font-size: 2.000rem;
+	}
+}
+/*Desktop*/
+@media (min-width: 1200px) {
+	.app-branding .media-heading {
+		font-size: 2.250rem;
+	}
+}
+@media print {
+	.app-branding .media-heading {
+		font-size: 24pt;
+	}
+}
+h2, .h2 {
+	font-size: 2.000rem;
+	color: #336CA2;
+}
+h3, .h3 {
+	font-size: 1.666rem;
+	color: #777;
+}
+h4, .h4 {
+	font-size: 1.333rem;
+	color: #444;
+}
+h5, .h5 {
+	font-size: 1.166rem;
+	color: #666;
+}
+h6, .h6 {
+	font-size: 1.083rem;
+}
+.heading-bordered {
+    border-bottom: 1px solid;
+}
+/* 
+blockquote {
+	font-size: 1.5rem;	
+}
+ */
+a {
+	text-decoration: underline;
+}
+hr {
+	margin-top: 0;
+}
+
+/* Header styles
+-------------------------------------------------- */
+.app-branding .media {
+	padding-top: 1.5em;
+}
+.app-branding .media .logo {
+	/* Set the total left and right margin of the image to the tagline to be 1/3 of the height of the image */
+	margin-right: 0.5em;
+	margin-left: 1.5em;
+	max-width: 5rem;
+	height: auto;
+}
+@media (min-width: 768px) {
+	.app-branding .media .logo {
+		max-width: 7rem;
+	}
+}
+@media (min-width: 992px) {
+	.app-branding .media .logo {
+		max-width: 9rem;
+	}
+}
+@media (min-width: 1200px) {
+	.app-branding .media .logo {
+		max-width: 11rem;
+	}
+}
+@media print {
+	.app-branding .media .logo {
+		max-width: 100%;
+	}
+}
+.app-branding .media-body {
+	padding-top: 0.60em;
+}
+.app-branding .media-heading {
+	font-family: Antenna, Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	font-size: 1.625rem;
+	color: #036;
+	text-decoration: none;
+}
+/*Tablet (potrait)*/
+@media (min-width: 768px) {
+	.app-branding .media-heading {
+		font-size: 2.000rem;
+	}
+}
+/*Tablet (landscape)*/
+@media (min-width: 992px) {
+	.app-branding .media-heading {
+		font-size: 2.000rem;
+	}
+}
+/*Desktop*/
+@media (min-width: 1200px) {
+	.app-branding .media-heading {
+		font-size: 2.250rem;
+	}
+}
+@media print {
+	.app-branding .media-heading {
+		font-size: 24pt;
+	}
+}
+.app-branding .media-heading:hover,
+.app-branding .media-heading:focus {
+	text-decoration: underline;
+}
+.app-branding .list-group {
+	margin-bottom: 0;
+}
+.app-branding .list-group .list-group-item {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.app-branding .welcome-text {
+	color: #336ca2;
+}
+.app-branding .list-group-item-heading,
+.app-branding .list-group-item-text {
+	display: block;
+	margin-bottom: 0;
+}
+.app-branding .list-group-item-heading {
+	width: 59%;
+}
+.app-branding .list-group-item-text {
+	width: 39%;
+}
+@media (min-width: 768px) {
+	padding-top: 1em;
+	}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+
+}
+
+/* Nav Bar styles
+-------------------------------------------------- */
+.navbar-default {
+	background-color: none;
+	border: none;
+}
+.navbar-default .navbar-brand {
+	height: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+.navbar-default .navbar-toggle {
+	background-color: #215A8F;
+	border: none;
+}
+.navbar-default .navbar-toggle:hover, 
+.navbar-default .navbar-toggle:focus {
+	background-color: #333;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #fff;
+}
+.navbar-default .navbar-nav {
+	background-color: #215A8F;
+}
+.navbar-default .navbar-nav a {
+	font-family: AntennaCond, Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	font-size: 1.166rem;
+	text-decoration: none;
+}
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+	color:#fff;
+}
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+	background-color: #333;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+	background-color: #024;
+}
+.navbar-default .navbar-nav .dropdown-menu {
+	background-color: #333;
+	border-top: none;
+}
+.navbar-default .navbar-nav .dropdown-menu > li > a,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: #aaa;
+	border-top: 1px solid #666;
+}
+.navbar-default .navbar-nav .dropdown-menu > li:first-child > a{
+	border-top: none;
+}
+.navbar-default .navbar-nav .dropdown-menu > li > a:hover, 
+.navbar-default .navbar-nav .dropdown-menu > li > a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+	color: #fff;
+	background-color: #666;
+}
+@media (min-width: 768px) {
+	.navbar-default {
+		background-color: #215A8F;
+	}
+	.navbar-default .navbar-nav > li > a,
+	.navbar-default .navbar-nav > li > a:hover, 
+	.navbar-default .navbar-nav > li > a:focus {
+		border-right: 2px groove #999999;
+	}
+	.navbar-default .navbar-nav > li:first-child > a,
+	.navbar-default .navbar-nav > li:first-child > a:hover, 
+	.navbar-default .navbar-nav > li:first-child > a:focus {
+		border-left: 2px groove #999999;
+	}
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+
+}
+
+/* Form Styles
+-------------------------------------------------- */
+a.btn {
+	text-decoration: none;
+}
+.btn.btn-sm {
+	font-weight: bold;
+}
+form.well {
+	background-color: #fff;
+}
+.form-actions {
+	width: auto;
+	border: 1px solid #e5e5e5;
+	background-color: #f5f5f5;
+	padding: 1em;
+}
+.form-group legend {
+	display: inline-block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 1em;
+	border: 0;
+}
+.required-legend {
+    position: relative;
+}
+.required-text {
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	z-index: 10;
+	display: block;
+	padding: 5px 8px;
+	font-size: 12px;
+	color: #777;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #e1e1e8;
+	border-radius: 0 4px 0 4px;
+}
+abbr.required {
+	color: #a94442;
+	cursor: default;
+	border: 0;
+}
+.invisible {
+	visibility: hidden;
+}
+
+fieldset.panel legend.panel-heading {
+	font-size: 1.25em;
+	padding: 5px 15px;
+}
+
+.panel .dl-horizontal dt {
+	width: 48%;
+}
+
+.panel .dl-horizontal dd {
+	margin-left: 50%;
+}
+.modal-footer.form-actions {
+	text-align: center;
+}
+
+.form-group .label {
+	background-color: #fff;
+	color: inherit;
+	font-size: 1em;
+	margin-top: 0.25em;
+	display: table;
+}
+
+.form-group .label-text {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.form-group .label-danger {
+	border: 1px solid #a94442;
+	padding: 0.5em;
+}
+
+.form-group .label-danger .glyphicon {
+	color: #a94442;
+	padding-right: 0.25em;
+	font-size: 1.5em;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.form-group .label-warning {
+	border: 1px solid #8a6d3b;
+	padding: 0.5em;
+}
+
+.form-group .label-warning .glyphicon {
+	color: #8a6d3b;
+	padding-right: 0.25em;
+	font-size: 1.5em;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.form-group .label-success {
+	border: 1px solid #3c763d;
+	padding: 0.5em;
+}
+
+.form-group .label-success .glyphicon {
+	color: #3c763d;
+	padding-right: 0.25em;
+	font-size: 1.5em;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+
+/* Angular.js Styles
+-------------------------------------------------- */
+
+/* Workaround for not including angular.js in the header, prevent flicker during compile */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+/* Network Status Indicator styles
+-------------------------------------------------- */
+.networkStatusIndicator .onlineOffline .online {
+    background-color: green;
+    color: white;
+}
+.networkStatusIndicator .onlineOffline .offline {
+    background-color: red;
+    color: white;
+}
+.networkStatusIndicator .authStatus .authenticated {
+    background-color: green;
+    color: white;
+}
+.networkStatusIndicator .authStatus .nonAuthenticated {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+.networkStatusIndicator .dataSource .local {
+    background-color: yellow;
+    color: black;
+}
+.networkStatusIndicator .dataSource .restangular {
+    background-color: green;
+    color: white;
+}
+
+/* Datatables Styles
+-------------------------------------------------- */
+
+.dataTables_wrapper .dataTables_info {
+	padding-top: 0.6em;
+}
+.dataTables_wrapper .pagination {
+	margin: 0;
+}
+.dataTables_wrapper .pagination > li.first,
+.dataTables_wrapper .pagination > li.previous,
+.dataTables_wrapper .pagination > li.next,
+.dataTables_wrapper .pagination > li.last {
+    position: relative;
+}
+.dataTables_wrapper .pagination > li.first a,
+.dataTables_wrapper .pagination > li.previous a {
+    padding-left: 18px;
+}
+.dataTables_wrapper .pagination > li.next a,
+.dataTables_wrapper .pagination > li.last a {
+    padding-right: 18px;
+}
+.dataTables_wrapper .pagination > li.first a:before,
+.dataTables_wrapper .pagination > li.previous a:before,
+.dataTables_wrapper .pagination > li.next a:after,
+.dataTables_wrapper .pagination > li.last a:after {
+	position: absolute;
+    top: 25%;
+    display: block;
+    font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	color: #336CA2;
+	
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.dataTables_wrapper .pagination > li.first a:before,
+.dataTables_wrapper .pagination > li.previous a:before {
+	left: 3px;
+}
+.dataTables_wrapper .pagination > li.next a:after,
+.dataTables_wrapper .pagination > li.last a:after {
+    right: 3px;
+}
+.dataTables_wrapper .pagination > li.first a.no-text:before,
+.dataTables_wrapper .pagination > li.previous a.no-text:before {
+	left: 25%;
+}
+.dataTables_wrapper .pagination > li.next a.no-text:after,
+.dataTables_wrapper .pagination > li.last a.no-text:after {
+    right: 25%;
+}
+.dataTables_wrapper .pagination > li.first a:before {
+	content: "\e069";
+}
+.dataTables_wrapper .pagination > li.previous a:before {
+	content: "\e071";
+}
+.dataTables_wrapper .pagination > li.next a:after {
+	content: "\e075";
+}
+.dataTables_wrapper .pagination > li.last a:after {
+	content: "\e077";
+}
+.dataTables_wrapper .pagination > li.first.disabled a:before,
+.dataTables_wrapper .pagination > li.previous.disabled a:before,
+.dataTables_wrapper .pagination > li.next.disabled a:after,
+.dataTables_wrapper .pagination > li.last.disabled a:after {
+    color: #999;
+}
+
+.dataTables_wrapper .table {
+	margin: 0.25em;
+}
+.dataTables_wrapper .table-bordered > thead > tr > th, 
+.dataTables_wrapper .table-bordered > tbody > tr > th, 
+.dataTables_wrapper .table-bordered > tfoot > tr > th, 
+.dataTables_wrapper .table-bordered > thead > tr > td, 
+.dataTables_wrapper .table-bordered > tbody > tr > td, 
+.dataTables_wrapper .table-bordered > tfoot > tr > td {
+	border-color: #aaa;
+}
+.dataTables_wrapper .table-striped > tbody > tr:nth-child(odd) > td, 
+.dataTables_wrapper .table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #eee;
+}
+.dataTables_wrapper .table-striped > tbody > tr:nth-child(even) > td, 
+.dataTables_wrapper .table-striped > tbody > tr:nth-child(even) > th {
+	background-color: #fff;
+}
+.dataTables_wrapper .table-condensed:not(.table-toggle-check-all)  > thead > tr > th {
+	padding-top: 9px;
+}
+.dataTables_wrapper .table > thead > tr > th {
+	position: relative;
+	background-image: none !important;
+}
+.dataTables_wrapper .table > thead > tr > th.sorting:after,
+.dataTables_wrapper .table > thead > tr > th.sorting_asc:after,
+.dataTables_wrapper .table > thead > tr > th.sorting_desc:after {
+	position: absolute;
+    top: 9px;
+    right: 5px;
+    display: block;
+    font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	color: #fff;
+	
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.dataTables_wrapper .table > thead > tr > th.sorting:after {
+	content: "\e150";
+}
+.dataTables_wrapper .table > thead > tr > th.sorting_asc:after {
+	content: "\e151";
+}
+.dataTables_wrapper .table > thead > tr > th.sorting_desc:after {
+	content: "\e152";
+}
+.dataTables_wrapper .table > thead > tr > th,
+.dataTables_wrapper .table > thead > tr > th.sorting {
+	background-color: #215A8F;
+	color: #fff;
+}
+.dataTables_wrapper .table > thead > tr > th.sorting_asc,
+.dataTables_wrapper .table > thead > tr > th.sorting_desc {
+	background-color: #0d73b0;
+}
+.dataTables_wrapper .table > thead > tr > th.sorting_asc_disabled,
+.dataTables_wrapper .table > thead > tr > th.sorting_desc_disabled {
+	background-color: #EAEBFF;
+}
+.dataTables_wrapper .table > tbody > tr > td.sorting_1 {
+	background-color: #D3D6FF;
+}
+.dataTables_wrapper .table > tbody > tr.selected > th, 
+.dataTables_wrapper .table > tbody > tr.selected > td {
+	background-color: #ffff99;
+	border-color: #ffe799;
+}
+
+.datatables-legend {
+    margin:7px 0 5px 0;
+    padding:5px 0 3px 0;
+    border-radius:4px;
+    border:1px solid #ccc;
+    min-height:25px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    text-align:right;
+    float:right;
+}
+.datatables-legend li {
+    display:inline-block;
+    padding:0 0 0 20px;
+    margin:0 20px;
+}
+.datatables-legend li.new-row {
+    background: url(images/favicon_16x16.jpg) no-repeat 0 0;
+}
+.datatables-legend li.status {
+    background:url(images/favicon_16x16.jpg) no-repeat 0 0;
+}
+.datatables-legend li.selected {
+    background:url(images/favicon_16x16.jpg) no-repeat 0 0;
+}
+.datatables-legend li.updated {
+    background:url(images/favicon_16x16.jpg) no-repeat 0 0;
+}
+
+
+/* Datepicker Styles
+-------------------------------------------------- */
+.datepicker .dropdown-menu {
+	background-color: #ccc;
+}
+
+.datepicker-container {
+	max-width: 185px;
+}
+
+
+
+#loading-indicator {
+	background-color: rgba(255, 255, 255, 0.95);
+	background-image: url('../image/loading-anim.gif');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100px 100px;
+	height: 200px;
+	width: 200px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	/* half the height */
+
+	margin-top: -100px;
+	/* half the width */
+
+	margin-left: -100px;
+	z-index: 10000000000;
+	border-radius: 6px;
+	display: none;
+}
+
+#loading-indicator span {
+	text-align: center;
+	display: block;
+	margin-top: 155px;
+	margin-left: 14px;
+	font-weight: 800;
+}
+
+#loading-cover {
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 99999999;
+	display: none;
+}
+
+

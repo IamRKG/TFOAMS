@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Class-Path: CPARS_MobileDomain.jar 
+ CPARS_MobileConsumer.jar 
+ CPARS_MobileProperties.jar 
+ lib/testing/aspectjrt-1.7.1.jar 
+ lib/testing/cactus-1.8.1.jar 
+ lib/testing/commons-codec-1.3.jar 
+ lib/testing/commons-httpclient-3.0.1.jar 
+ lib/testing/junit-3.8.2.jar 
+ resources/build/dist/sitesource/java2html/j2h.jar 
+ TFOAMS_MobileBusiness.jar 
+ TFOAMS_MobileCommon.jar
+

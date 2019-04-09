@@ -1,0 +1,25 @@
+
+<h2>{{reportsCtrl.reportsListOpen.name}}</h2>
+
+<form class="" role="form" name="reportTable" novalidate>
+    <h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+	<div class="table-responsive" datatable="{{reportsCtrl.reportTable.overrideOptions}}" columns="reportsCtrl.reportTable.columns" column-defs="{{reportsCtrl.reportTable.columnDefs}}" data="reportsCtrl.reports" >
+	
+	<table id="reportTable" class="table table-bordered table-striped" summary="Tracking #,Dealer,Vehicle,Details">
+        <caption class="hidden">
+        {{'reports.myAssignedRequests' | translate}}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{'reports.trackingNumber' | translate}}</th>
+            <th scope="col">{{'reports.dealerName' | translate}}</th>
+            <th scope="col">{{'reports.modelYearVehicle' | translate}}</th>
+			<th scope="col">{{'reports.details' | translate}}</th>
+          </tr>
+        </thead>
+      </table>
+	
+	</div>
+	
+
+</form>

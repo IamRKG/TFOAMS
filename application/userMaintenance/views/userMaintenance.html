@@ -1,0 +1,200 @@
+<alert ng-repeat="alert in userMaintenanceCtrl.onlyVisibleMessages" type="{{alert.type}}" close="userMaintenanceCtrl.close()">{{alert.msg}}</alert>
+<h1>{{'application.navigation.links.userMaintenance' | translate}}</h1>
+
+<h2>{{'userMaintenance.createOrUpdateAUser' | translate}}</h2>
+
+<form class="" role="form" name="userMaintenance" novalidate>
+
+        <div class="required-legend">
+            <span class="required-text"><abbr class="required h6"
+                                              title="Required">*</abbr> indicates required fields</span>
+        </div>
+
+        <div class="row">
+            <div class="form-horizontal col-sm-12 col-xs-12">
+                <div class="form-group form-group-primary"
+                     ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.cdsId.$invalid}">
+                    <label for="cdsId" class="col-xs-3 control-label no-bg-label"><abbr title="Required">*</abbr>{{'userMaintenance.cdsId'
+                        | translate}} :</label>
+
+                    <div class="input-group  col-xs-12">
+                        <input type="text" class="form-control" id="cdsId" name="cdsId"
+                               ng-model="userMaintenanceCtrl.inputCDSId" ng-required="true" ng-maxlength=8/>
+          <span class="input-group-btn">
+          <button class="btn btn btn-primary" type="button" title="Go" id="goBtn"
+                  ng-click="userMaintenanceCtrl.searchUser('GO')">{{'buttons.go' | translate}}
+          </button>
+          </span></div>
+                     <div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.cdsId.$invalid">
+                               <span class="error" ng-show="userMaintenance.cdsId.$error.required">
+            						                              <span class="glyphicon glyphicon-remove-circle"></span>
+                               <span class="label-text">{{'userMaintenance.isRequiredErrorEnter' | translate}}   {{'userMaintenance.cdsId' | translate}}</span>
+ 
+    						   </span>
+                               <span class="error" ng-show="userMaintenance.cdsId.$error.maxlength">
+ 		                          <span class="glyphicon glyphicon-remove-circle"></span>
+            						<span class="label-text">{{'userMaintenance.maxlength' | translate}}</span>
+    						   </span>
+                               
+                               </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAD UserMaintenance-->
+            <div ng-if="applicationCtrl.userInformation.jobRole == 'SAD'">
+ 
+                    <div class="form-group col-sm-6 col-xs-12"
+                         ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.role.$invalid}">
+                        <label for="role" class="control-label"><abbr title="Required">*</abbr>{{'userMaintenance.role'
+                            | translate}} </label>
+                        <select ng-model="userMaintenanceCtrl.selectedRole" ng-init=""
+                                ng-options="role.code as role.description for role in userMaintenanceCtrl.SADUserRoles"
+                                ng-change="userMaintenanceCtrl.loadCountry()"
+                                id="role" name="role" class="form-control" required>
+                            <option value="">Please select</option>
+                        </select>
+					<div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.role.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.role' | translate}}</span></span>
+                    </div>
+                    </div>
+
+
+
+                    <div class="form-group col-sm-6 col-xs-12" ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.country.$invalid}">
+                        <label for="country" class="control-label"><abbr title="Required">*</abbr>{{'userMaintenance.country'
+                            | translate}} </label>
+
+                        <select ng-model="userMaintenanceCtrl.selectedCountry" id="country" name="country"
+                                class="form-control" required
+                                ng-disabled="!userMaintenanceCtrl.selectedRole || userMaintenanceCtrl.selectedRole=='SAD'"
+                                ng-change="userMaintenanceCtrl.loadTerritory()">
+                            <option default ng-repeat="country in userMaintenanceCtrl.sadTerritory.countryList"
+                                    value="{{country.code}}">{{country.description}}
+                            </option>
+                            <option ng-if="userMaintenanceCtrl.selectedRole=='SAD'" value="ALL">ALL</option>
+                        </select>
+                        	<div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.country.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.country' | translate}}</span></span>
+                    </div>
+                    </div>
+
+ 
+
+
+                    <div class="form-group col-sm-6 col-xs-12" ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.sadTerritory.$invalid}">
+                        <label for="country" class="control-label"><abbr title="Required">*</abbr> {{'userMaintenance.territory'
+                            | translate}} </label>
+
+                        <ui-select id="territorySAD" multiple ng-model="userMaintenanceCtrl.selectedTerritory"
+                                   ng-disabled="!userMaintenanceCtrl.selectedCountry || !userMaintenanceCtrl.selectedRole" required name="sadTerritory">
+                            <ui-select-match placeholder="Select Territory">{{$item.description}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="territory.code as territory in userMaintenanceCtrl.sadTerritoryList">
+                                {{territory.description}}
+                            </ui-select-choices>
+                        </ui-select>
+   
+						<div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.sadTerritory.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.territory' | translate}}</span></span>
+                    </div>
+                    </div>
+            </div>
+
+            <!-- RAD UserMaintenance-->
+            <div ng-if="applicationCtrl.userInformation.jobRole == 'NAD' || applicationCtrl.userInformation.jobRole == 'RAD'">
+
+                <div class="form-group col-sm-6 col-xs-12"
+                     ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.role.$invalid}">
+                    <label for="role"><abbr title="Required">*</abbr>{{'userMaintenance.role' | translate}}</label>
+                    <select class="form-control" id="role" name="role" ng-model="userMaintenanceCtrl.selectedRole"
+                            ng-options="role.code as role.description for role in userMaintenanceCtrl.radRoleList.roleList"
+                            ng-required="true" ng-change="userMaintenanceCtrl.loadTerritoryRegion()">
+                        <option default value="">Select</option>
+                    </select>
+
+                    <div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.role.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span> <span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.role' | translate}}</span></span>
+                    </div>
+                </div>
+                 <div class="form-group  col-sm-6 col-xs-12" ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.radTerritory.$invalid}">
+                    <label for="country" class="control-label">{{'userMaintenance.territory' | translate}} </label>
+                    <ui-select id="territory"  name="radTerritory" multiple ng-model="userMaintenanceCtrl.selectedTerritory" required
+                               ng-disabled="userMaintenanceCtrl.selectedRole==undefined||userMaintenanceCtrl.selectedRole=='GUR'||userMaintenanceCtrl.selectedRole=='MGR'">
+                        <ui-select-match placeholder="Select Territory">{{$item.description}}</ui-select-match>
+                        <ui-select-choices
+                                repeat="territory.code as territory in userMaintenanceCtrl.radTerritoryList.territoryList">
+                            {{territory.description}}
+                        </ui-select-choices>
+                    </ui-select>
+                    <div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.radTerritory.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.territory' | translate}}</span></span>
+                    </div>
+                </div>
+
+                <div class="form-group  col-sm-6 col-xs-12" ng-class="{'has-error': userMaintenanceCtrl.isFormSubmitted && userMaintenance.region.$invalid}">
+                    <label for="country" class="control-label">{{'userMaintenance.facingRegion' | translate}} </label>
+                    <ui-select id="region" name="region" multiple ng-model="userMaintenanceCtrl.selectedRegion" required
+                               ng-disabled="userMaintenanceCtrl.selectedRole!='GUR'&& userMaintenanceCtrl.selectedRole!='MGR'">
+                        <ui-select-match placeholder="Select region">{{$item.description}}</ui-select-match>
+                        <ui-select-choices
+                                repeat="region.code as region in userMaintenanceCtrl.radRegionsList.regionList">
+                            {{region.description}}
+                        </ui-select-choices>
+                    </ui-select>
+                    <div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.region.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorSelect' | translate}}   {{'userMaintenance.facingRegion' | translate}}</span></span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="form-horizontal col-sm-12 col-xs-12">
+                <div class="form-group form-group-primary">
+                    <label for="cdsId" class="control-label no-bg-label">{{'userMaintenance.selectAction' | translate}}
+                        :</label>
+                        <select ng-init="userMaintenanceCtrl.selectedAction = 'CN'" class="form-control"
+                                id="select-action" name="select-action" ng-model="userMaintenanceCtrl.selectedAction"
+                                ng-required="true">
+                            <option default value="CN">{{'userMaintenance.createNewUser' | translate}}</option>
+                            <option value="D">{{'userMaintenance.deleteUser' | translate}}</option>
+                        </select>
+
+
+                    <div><span class="label label-danger"
+                               ng-show="userMaintenanceCtrl.isFormSubmitted && userMaintenance.select-action.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'userMaintenance.isRequiredErrorEnter' | translate}}   {{'userMaintenance.selectAction' | translate}}</span></span>
+                    </div>
+                </div>
+               <div class="text-center form-group">
+              <div class="row">
+                <div class="col-xs-6 text-right">
+                   <button class="btn btn btn-primary" type="button" title="btn-submit" id="btn-submit"
+                  	ng-click="userMaintenanceCtrl.chooseAction()">{{'buttons.submit' | translate}}
+        		  </button>
+                </div>
+            <div class="col-xs-6 text-left">
+                    <button type="button" class="btn btn-secondary" title="Cancel" id="cancel" ui-sref="home">Cancel
+                    </button>
+                </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+
+</form>
+

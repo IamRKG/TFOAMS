@@ -1,0 +1,21 @@
+[
+		{
+			"id":1,
+			"trackingNumber":"200066079",
+			"dealerName":"Hakim Ford",
+			"modelYearVehicle":"2014 C-Max"
+		},
+	
+		{
+			"id":2,
+			"trackingNumber":"39991234567",
+			"dealerName":"Hakim Ford",
+			"modelYearVehicle":"2012 Edge"
+		},
+		{
+			"id":3,
+			"trackingNumber":"49991234567",
+			"dealerName":"Velasco Ford",
+			"modelYearVehicle":"2014 Mustang"
+		}
+]

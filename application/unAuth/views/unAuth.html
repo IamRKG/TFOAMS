@@ -1,0 +1,103 @@
+<alert ng-repeat="alert in unAuthCtrl.onlyVisibleMessages" type="{{alert.type}}"
+       close="unAuthCtrl.close()">{{alert.msg}}
+</alert>
+
+
+<h1>{{'unAuth.title' | translate}}</h1>
+
+
+<form class="" role="form" name="unAuth" novalidate>
+
+    <p>{{'unAuth.info' | translate:applicationCtrl.userInformation}}</p>
+
+    <h2>{{'unAuth.subTitle' | translate}}</h2>
+
+    <div class="row">
+        <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': unAuthCtrl.isFormSubmitted && unAuth.userName.$invalid}">
+            <label for="name" class="control-label"><abbr
+                    class="required h6" title="Required">*</abbr>{{'unAuth.name'
+                | translate}}
+            </label>
+            <input id="name" type="text" placeholder="ex. smith" name="userName"
+                            class="form-control" ng-model="unAuthCtrl.name" required>
+
+            <div><span class="label label-danger"
+                       ng-show="unAuthCtrl.isFormSubmitted && unAuth.userName.$invalid"><span
+                    class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'unAuth.isRequired' | translate}}   {{'unAuth.name' | translate}}</span></span>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': unAuthCtrl.isFormSubmitted && unAuth.cdsid.$invalid}">
+            <label for="cdsid" class="control-label"><abbr
+                    class="required h6" title="Required">*</abbr>{{'unAuth.cdsid'
+                | translate}}
+            </label> <input id="cdsid" type="text" name="cdsid"
+                            class="form-control" ng-model="unAuthCtrl.cdsid" required>
+
+            <div><span class="label label-danger"
+                       ng-show="unAuthCtrl.isFormSubmitted && unAuth.cdsid.$invalid"><span
+                    class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'unAuth.isRequired' | translate}}   {{'unAuth.cdsid' | translate}}</span></span>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': unAuthCtrl.isFormSubmitted && unAuth.country.$invalid}">
+            <label for="country" class="control-label"><abbr
+                    class="required h6" title="Required">*</abbr>{{'unAuth.country'
+                | translate}}
+            </label>
+            <select required ng-model="unAuthCtrl.selectedCountry"  id="country" name="country" class="form-control" ng-options="country.code as country.description for country in unAuthCtrl.countryList"
+                    ng-change="unAuthCtrl.loadRegion()" required>
+               <option ng-if="false"></option>
+            </select>
+
+            <div><span class="label label-danger"
+                       ng-show="unAuthCtrl.isFormSubmitted && unAuth.country.$invalid"><span
+                    class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'unAuth.isRequiredSelect' | translate}}   {{'unAuth.country' | translate}}</span></span>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': unAuthCtrl.isFormSubmitted && unAuthCtrl.selectedRegion.length<1}">
+            <label for="fcsd-region" class="control-label"><abbr
+                    class="required h6" title="Required">*</abbr>{{'unAuth.FCSDRegion'
+                | translate}}
+            </label>
+            <ui-select id="fcsd-region" name="fcsd-region" multiple ng-model="unAuthCtrl.selectedRegion" name="fcsdRegion" required>
+                <ui-select-match placeholder="Select region">{{$item.description}}</ui-select-match>
+                <ui-select-choices
+                        repeat="region.code as region in unAuthCtrl.fcsdRegion">
+                    {{region.description}}
+                </ui-select-choices>
+            </ui-select>
+
+            <div><span class="label label-danger"
+                       ng-show="unAuthCtrl.isFormSubmitted && unAuthCtrl.selectedRegion.length<1"><span
+                    class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'unAuth.isRequiredSelect' | translate}}   {{'unAuth.FCSDRegion' | translate}}</span></span>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': unAuthCtrl.isFormSubmitted && unAuth.reason.$invalid}">
+            <label for="reason" class="control-label"><abbr
+                    class="required h6" title="Required">*</abbr>{{'unAuth.businessReasonForRequest'
+                | translate}}
+            </label>
+            <textarea id="reason" name="reason"  rows="2" cols="48"
+                      placeholder="Enter your explanation here" class="form-control"
+                      ng-model="unAuthCtrl.businessReason" required></textarea>
+
+            <div><span class="label label-danger"
+                       ng-show="unAuthCtrl.isFormSubmitted && unAuth.reason.$invalid"><span
+                    class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'unAuth.isRequired' | translate}}   {{'unAuth.businessReasonForRequest' | translate}}</span></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-horizontal" >
+        <div class="text-center form-group">
+            <button type="button" class="btn btn-primary" title="Submit"
+                    id="submit" ng-click="unAuthCtrl.submit()">Submit</button>
+        </div>
+    </div>
+
+
+</form>

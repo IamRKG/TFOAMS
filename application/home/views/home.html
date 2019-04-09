@@ -1,0 +1,165 @@
+<h1>{{'application.navigation.links.home' | translate}}</h1>
+
+
+<form class="" role="form" name="homePage" novalidate>
+    <div ng-if="applicationCtrl.userInformation.jobRole=='SAD'">
+<p>{{'home.SAD.instructions' | translate:applicationCtrl.userInformation}}</p>
+<h2>{{'home.SAD.subTitle' | translate}}</h2>
+
+<div class="row">
+ 		<div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': homePageCtrl.isFormSubmitted && homePage.changeRADRegion.$error.required}">
+			<label for="RADRegion" class="control-label"><abbr title="Required">*</abbr>{{'home.SAD.RADRegion' | translate}} </label>
+			<div class="input-group">
+				
+			<select ng-model="homePageCtrl.selectedRoleRegion"  id="RADRegion" name="changeRADRegion" class="form-control" ng-options="country.code as country.roleAndCountry for country in homePageCtrl.countryList.countryList" required>
+				<option default value="">Select One</option>            		
+			</select>
+			<span class="input-group-btn">
+				<button id="go" ng-click="homePageCtrl.chooseRole()" class="btn btn-primary">{{'buttons.go' | translate}}</button>
+			</span>
+			</div>
+			<span id="RADRegionRequired" class="label label-danger " ng-show="homePageCtrl.isFormSubmitted && homePage.changeRADRegion.$error.required">
+				<span class="glyphicon glyphicon-remove-sign"></span> 
+				<span class="label-text"> {{'home.SAD.RADRegion' | translate}} is required.</span>
+			</span>
+		</div>
+</div>
+
+</div>
+
+    <div ng-if="applicationCtrl.userInformation.jobRole=='RAD' 
+    || applicationCtrl.userInformation.jobRole=='NAD' 
+    || applicationCtrl.userInformation.jobRole=='FSE' 
+    || applicationCtrl.userInformation.jobRole=='OTR' 
+    || applicationCtrl.userInformation.jobRole=='GUR' 
+    || applicationCtrl.userInformation.jobRole=='MGR'">
+<p ng-if="applicationCtrl.userInformation.jobRole=='RAD'|| applicationCtrl.userInformation.jobRole=='NAD' ">{{'home.RADUsers.instructions' | translate:applicationCtrl.userInformation}}</p>
+<p ng-if="applicationCtrl.userInformation.jobRole=='FSE' 
+    || applicationCtrl.userInformation.jobRole=='OTR' 
+    || applicationCtrl.userInformation.jobRole=='GUR' 
+    || applicationCtrl.userInformation.jobRole=='MGR'">{{'home.otherUsers.instructions' | translate:applicationCtrl.userInformation}}</p>
+		
+
+	 <div class="row"  ng-if="applicationCtrl.userInformation.originalJobRole=='SAD'">
+	  <div class="col-sm-12 col-xs-12 form-group" ng-class="{'has-error': homePageCtrl.isFormSubmitted && homePage.changeRADRegion.$error.required}">
+	  <div class="input-group">
+			<select ng-model="homePageCtrl.selectedRoleRegion"  id="RADRegion" name="changeRADRegion" class="form-control" ng-options="country.code as country.roleAndCountry for country in homePageCtrl.countryList.countryList" required>
+				<option default value="">Select One</option>            		
+			</select>
+			
+		  	<span class="input-group-btn">
+				<button id="go" ng-click="homePageCtrl.chooseRole()" class="btn btn-primary">{{'buttons.go' | translate}}</button>
+			</span>
+		</div>
+		<span id="RADRegionRequired" class="label label-danger " ng-show="homePageCtrl.isFormSubmitted && homePage.changeRADRegion.$error.required">
+				<span class="glyphicon glyphicon-remove-sign"></span> 
+				<span class="label-text"> {{'home.SAD.RADRegion' | translate}} is required.</span>
+			</span>
+	  </div>
+		</div>
+  
+   
+      <div class="row">
+        <div class="col-xs-12" >
+          <h2> {{'home.RADUsers.myAssignedRequests' | translate}}</h2>
+        </div>
+        
+        <div class="col-xs-12 h4">           		  
+			  <a ng-href="#/reports/RAM" title="See All My Assigned Requests" id="seeAll" class="h3">{{'links.seeAllMyAssignedRequests' | translate}}</a>
+        </div>
+      </div>
+    
+   	<h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+   
+    <div class="table-responsive" datatable="{{homePageCtrl.reportTable.overrideOptions}}" columns="homePageCtrl.reportTable.columns" column-defs="{{homePageCtrl.reportTable.columnDefs}}" data="homePageCtrl.reports" >
+	<table class="table table-bordered table-striped" summary="Tracking #,Dealer,Vehicle,Details">
+        <caption class="hidden">
+        {{'reports.myAssignedRequests' | translate}}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{'reports.trackingNumber' | translate}}</th>
+            <th scope="col">{{'reports.dealerName' | translate}}</th>
+            <th scope="col">{{'reports.modelYearVehicle' | translate}}</th>
+			<th scope="col">{{'reports.details' | translate}}</th>
+          </tr>
+        </thead>
+      </table>
+	
+	</div>
+    
+  <div class="btn-group">
+    <p>
+      <button type="button" class="btn btn-primary" title="Create Request" id="createRequestBtn" ui-sref="createRequest">{{'application.navigation.links.createRequest' | translate}}</button>
+    </p>
+  </div>
+
+</div>
+
+
+
+    <div ng-if="applicationCtrl.userInformation.jobRole=='SDP'||
+                applicationCtrl.userInformation.jobRole=='PDP'">
+<p>{{'home.restUsers.instructions' | translate:applicationCtrl.userInformation}}</p>
+
+
+<div class="row">
+        <div class="col-xs-12" >
+          <h2> {{'home.RADUsers.myAssignedRequests' | translate}}</h2>
+        </div>
+        <div class="col-xs-12">           		  
+			  <a ng-href="#/reports/RAM" title="See All My Assigned Requests" id="seeAll" class="h3">{{'links.seeAllMyAssignedRequests' | translate}}</a>
+        </div>
+      </div>
+      <h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+  <div class="table-responsive" datatable="{{homePageCtrl.reportTable.overrideOptions}}" columns="homePageCtrl.reportTable.columns" column-defs="{{homePageCtrl.reportTable.columnDefs}}" data="homePageCtrl.reports" >
+	
+	<table class="table table-bordered table-striped" summary="Tracking #,Dealer,Vehicle,Details">
+        <caption class="hidden">
+        {{'reports.myAssignedRequests' | translate}}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{'reports.trackingNumber' | translate}}</th>
+            <th scope="col">{{'reports.dealerName' | translate}}</th>
+            <th scope="col">{{'reports.modelYearVehicle' | translate}}</th>
+			<th scope="col">{{'reports.details' | translate}}</th>
+          </tr>
+        </thead>
+      </table>
+	
+	</div>
+		
+		<div class="btn-group">
+		<p><button  class="btn btn-primary" title="Create Request" ui-sref="createRequest">{{'application.navigation.links.createRequest' | translate}}</button></p>
+		</div>
+		
+		<div class="row">
+        <div class="col-xs-12" >
+          <h2> {{'home.restUsers.mySubmittedRequests' | translate}}</h2>
+        </div>
+        <div class="col-xs-12">           		  
+			  <a ng-href="#/reports/OPA" title="See All My Assigned Requests" id="seeAll" class="h3">{{'links.seeAllMySubmittedRequests' | translate}}</a>
+        </div>
+      </div>
+      <h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+  <div class="table-responsive" datatable="{{homePageCtrl.reportTable.overrideOptions}}" columns="homePageCtrl.reportTable.columns" column-defs="{{homePageCtrl.reportTable.columnDefs}}" data="homePageCtrl.reportPDP" >
+	
+	<table class="table table-bordered table-striped" summary="Tracking #,Dealer,Vehicle,Details">
+        <caption class="hidden">
+        {{'home.restUsers.mySubmittedRequests' | translate}}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">{{'reports.trackingNumber' | translate}}</th>
+            <th scope="col">{{'reports.dealerName' | translate}}</th>
+            <th scope="col">{{'reports.modelYearVehicle' | translate}}</th>
+			<th scope="col">{{'reports.details' | translate}}</th>
+          </tr>
+        </thead>
+      </table>
+	
+	</div>
+
+</div>
+</form>

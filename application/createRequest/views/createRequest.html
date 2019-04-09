@@ -1,0 +1,1013 @@
+<alert ng-repeat="alert in createRequestCtrl.onlyVisibleMessages" type="{{alert.type}}"
+       close="createRequestCtrl.close()">{{alert.msg}}
+</alert>
+<h1 ng-if="!createRequestCtrl.trackingNumber&&!createRequestCtrl.updatedRFADetails">
+    {{'application.navigation.links.createRequest' | translate}}</h1>
+<h1 ng-if="createRequestCtrl.trackingNumber||createRequestCtrl.updatedRFADetails">{{'createRequest.updateRequest' |
+    translate}}</h1>
+
+<p ng-if="!createRequestCtrl.trackingNumber&&!createRequestCtrl.updatedRFADetails">{{'createRequest.info' |
+    translate}}</p>
+<p ng-if="createRequestCtrl.trackingNumber||createRequestCtrl.updatedRFADetails">{{'createRequest.updateRequestInfo' |
+    translate}}</p>
+
+<div ng-if="createRequestCtrl.trackingNumber||createRequestCtrl.updatedRFADetails">
+    <p class="h2">{{'createRequest.trackingNo' | translate}}
+        <span ng-if="createRequestCtrl.trackingNumber&&!createRequestCtrl.updatedRFADetails">{{createRequestCtrl.trackingNumber}}</span>
+        <span ng-if="!createRequestCtrl.trackingNumber&&createRequestCtrl.updatedRFADetails">{{createRequestCtrl.updatedRFADetails.trackingNumber}}</span>
+        <span ng-if="createRequestCtrl.trackingNumber&&createRequestCtrl.updatedRFADetails">{{createRequestCtrl.updatedRFADetails.trackingNumber}}</span>
+    </p>
+
+    <p class="h2">
+        <span ng-if="!createRequestCtrl.updatedRFADetails">{{'createRequest.status' | translate}} {{createRequestCtrl.RFADetails.rfaStatusDescription}} to
+        {{createRequestCtrl.RFADetails.currentAssignee}}</span>
+        <span ng-if="createRequestCtrl.updatedRFADetails">{{'createRequest.status' | translate}} {{createRequestCtrl.updatedRFADetails.rfaStatusDescription}} to
+        {{createRequestCtrl.updatedRFADetails.currentAssignee}}</span>
+    </p>
+
+</div>
+<form role="form" name="GCQISReportNumberForm" novalidate>
+    <div ng-if="createRequestCtrl.RFADetails.rfaStatus == ''">
+        <div class="required-legend">
+      <span class="required-text"><abbr class="required h6"
+                                        title="Required">*</abbr> indicates required fields</span>
+        </div>
+        <div class="row">
+            <div class="form-horizontal col-sm-4">
+                <div ng-if="!createRequestCtrl.trackingNumber" class="form-group form-group-primary"
+                     ng-class="{'has-error': createRequestCtrl.isValid && GCQISReportNumberForm.cdsId.$invalid}">
+                    <label for="GCQIS-report" class="col-xs-3 control-label no-bg-label">{{'createRequest.GCQISReport' |
+                        translate}} :</label>
+
+                    <div class="input-group col-xs-9">
+                        <input type="text" class="form-control" id="GCQIS-report" name="cdsId"
+                               ng-model="createRequestCtrl.RFADetails.gcqisReportNumber" required
+                               placeholder="ex. PXXXXXXXXX"/> <span class="input-group-btn">
+               <button class="btn btn btn-primary" type="button" title="Go"
+                       id="go" ng-click="createRequestCtrl.getGCQISReport()">{{'buttons.go'
+                   | translate}}
+               </button>
+               </span>
+                    </div>
+                    <div>
+               <span class="label label-danger"
+                     ng-show="createRequestCtrl.isValid && GCQISReportNumberForm.cdsId.$invalid"><span
+                       class="glyphicon glyphicon-remove-circle"></span><span
+                       class="label-text">{{'createRequest.isRequiredErrorEnter' |
+               translate}} {{'createRequest.GCQISReport' | translate}}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<form class="" role="form" name="createRequest" novalidate>
+
+
+    <accordion close-others=false>
+        <accordion-group is-open="createRequestCtrl.status.isOpenRequestInfo">
+            <accordion-heading class="h2">
+                <span>{{'createRequest.requestInfo' | translate}}</span>
+                <a ng-click="show = !show" class="pull-right" ng-show="show">{{'searchRequests.show'
+                    | translate}}</a>
+                <a class="pull-right" ng-click="show = !show" ng-show="!show">{{'searchRequests.hide'
+                    | translate}}</a>
+            </accordion-heading>
+            <div class="container-fluid" id="requestInfo">
+                <div class="row">
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.requestSource.$invalid}">
+                        <label for="request-source" class="control-label"> <abbr
+                                class="required h6" title="Required">*</abbr>{{'createRequest.requestSource'
+                            | translate}}
+                        </label>
+                        <select ng-required="true" id="request-source" class="form-control"
+                                ng-model="createRequestCtrl.RFADetails.requestSourceCode"
+                                ng-change="createRequestCtrl.loadResourceType()" name="requestSource"
+                                ng-options="request.code as request.description for request in createRequestCtrl.requestSource"
+                                required>
+                            <option ng-if="false"></option>
+                        </select>
+
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isFormSubmitted && createRequest.requestSource.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.requestSource' | translate}}</span></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="explanation" class="control-label">{{'createRequest.explanation'
+                            | translate}}</label>
+                  <textarea id="explanation" rows="2" cols="48"
+                            placeholder="Enter your explanation here" class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.otherRequestSourceDescription"></textarea>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.requestType.$invalid}">
+                        <label for="request-type" class="control-label"> <abbr
+                                class="required h6" title="Required">*</abbr>{{'createRequest.requestType'
+                            | translate}}
+                        </label>
+                        <select ng-required="true" id="request-type" name="requestType" class="form-control"
+                                ng-model="createRequestCtrl.RFADetails.requestTypeCode"
+                                ng-options="request.code as request.description for request in createRequestCtrl.requestTypeList"
+                                required>
+                            <!--<option ng-if="false"></option>-->
+                        </select>
+
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isFormSubmitted && createRequest.requestType.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.requestType' | translate}}</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.requestDescription.$invalid}">
+                        <label for="request-description" class="control-label"> <abbr
+                                class="required h6" title="Required">*</abbr>{{'createRequest.requestDescription'
+                            | translate}}
+                        </label>
+                  <textarea ng-model="createRequestCtrl.RFADetails.requestDescription" id="request-description"
+                            name="requestDescription" rows="4"
+                            cols="48"
+                            placeholder="Enter your description here" class="form-control" required></textarea>
+
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isFormSubmitted && createRequest.requestDescription.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.requestDescription' | translate}}</span></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.assignToFSE.$invalid}"
+                         ng-if="(createRequestCtrl.RFADetails.rfaStatus=='2' || createRequestCtrl.RFADetails.rfaStatus=='3') &&(applicationCtrl.userInformation.jobRole=='NAD' || applicationCtrl.userInformation.jobRole=='PDP' || applicationCtrl.userInformation.jobRole=='SDP')">
+                        <label for="assign-to-FSE" class="control-label"> <abbr
+                                class="required h6" title="Required">*</abbr>{{'createRequest.assignToFSE'
+                            | translate}}
+                        </label>
+                        <select id="assign-to-FSE" name="assignToFSE" class="form-control"
+                                ng-model="createRequestCtrl.RFADetails.assignTo"
+                                ng-disabled="createRequestCtrl.updatedRFADetails.rfaStatus=='3'">
+                            <option value="{{assignee.cdsID}}"
+                                    ng-repeat="assignee in createRequestCtrl.RFADetails.selectAsigneeList">
+                                {{assignee.empFullName}}
+                            </option>
+                        </select>
+
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isFormSubmitted && createRequest.assignToFSE.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.assignToFSE' | translate}}</span></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-if="createRequestCtrl.RFADetails.rfaStatus=='2' || createRequestCtrl.RFADetails.rfaStatus=='3'"
+                         ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.priority.$invalid}">
+                        <label for="priority" class="control-label"> <abbr
+                                class="required h6" title="Required">*</abbr>{{'createRequest.priority'
+                            | translate}}</label>
+                        <select ng-model="createRequestCtrl.RFADetails.priority" id="priority" name="priority" required
+                                class="form-control">
+                            <option value="">Select</option>
+                            <option value="H">High</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Low</option>
+                        </select>
+
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isFormSubmitted && createRequest.priority.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.priority' | translate}}</span></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-class="{'has-error': createRequestCtrl.isGCQISReporFormSubmitted && createRequest.exportGCQISReport.$invalid || createRequestCtrl.isFormSubmitted && createRequest.exportGCQISReport.$invalid || createRequestCtrl.isGCQISReporFormSubmittedEmailSummary && createRequest.exportGCQISReport.$invalid}">
+                        <label for="GCQIS-report" class="control-label">{{'createRequest.GCQISReport' |
+                            translate}} :</label>
+                        <input type="text" class="form-control" id="GCQIS-report" name="exportGCQISReport" maxlength="8"
+                               ng-model="createRequestCtrl.RFADetails.gcqisReportNumber"
+                               ng-disabled="createRequestCtrl.gcqisAccess.gcqisAccess"
+                               placeholder="ex. PXXXXXXXXX"
+                               ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' && applicationCtrl.userInformation.gcqisAccess == true || createRequestCtrl.requiredExportGCQIS.status == 'All' && applicationCtrl.userInformation.gcqisAccess == true ||
+                               applicationCtrl.userInformation.gcqisAccess == true && createRequestCtrl.requiredExportGCQISEmailSummary.requiredEmail == 'Yes'"/>
+                        <span class="input-group-btn"/>
+}
+                        <div><span class="label label-danger"
+                                   ng-show="createRequestCtrl.isGCQISReporFormSubmitted && createRequest.exportGCQISReport.$invalid || createRequestCtrl.isFormSubmitted && createRequest.exportGCQISReport.$invalid || createRequestCtrl.isGCQISReporFormSubmittedEmailSummary && createRequest.exportGCQISReport.$invalid"><span
+                                class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.GCQISReport' | translate}}</span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="GCQIS-comments" class="control-label">{{'createRequest.GCQISComments'
+                            | translate}}</label>
+                  <textarea placeholder="None" ng-model="createRequestCtrl.RFADetails.gcqisComments" id="GCQIS-comments"
+                            rows="4" cols="48"
+                            placeholder="" class="form-control" ng-disabled="true"></textarea>
+                        <button type="button" class="btn btn-secondary2"
+                                ng-disabled="createRequestCtrl.gcqisAccess.gcqisAccess"
+                                ng-click="createRequestCtrl.refreshCommentsTar();">{{'createRequest.refresh'
+                            | translate}}
+                        </button>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"
+                         ng-if="createRequestCtrl.trackingNumber||createRequestCtrl.updatedRFADetails">
+                        <label for="history" class="control-label"> {{'createRequest.historyOfThisRequest'
+                            | translate}}
+                        </label>
+
+                        <p>
+                            <button id="history" class="btn btn-secondary2 btn-xs" data-toggle="modal"
+                                    ng-click="createRequestCtrl.showRequestHistory();">
+                                {{'createRequest.showHistory' | translate}}
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+        <accordion-group is-open="createRequestCtrl.status.isOpenContactInfo">
+            <accordion-heading class="h2">
+                <span>{{'createRequest.contactInfo' | translate}}</span>
+                <a ng-click="show = !show" class="pull-right" ng-show="show">{{'searchRequests.show'
+                    | translate}}</a>
+                <a class="pull-right" ng-click="show = !show" ng-show="!show">{{'searchRequests.hide'
+                    | translate}}</a>
+            </accordion-heading>
+            <div class="form-group col-sm-4"
+                 ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.primaryContactName.$invalid}">
+                <label for="primary-contact" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.primaryContact'
+                    | translate}}
+                </label> <input id="primary-contact" name="primaryContactName" type="text"
+                                placeholder="Enter contact name"
+                                class="form-control" ng-model="createRequestCtrl.RFADetails.primaryContactName"
+                                required>
+
+                <div><span class="label label-danger"
+                           ng-show="createRequestCtrl.isFormSubmitted && createRequest.primaryContactName.$invalid"><span
+                        class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.primaryContact' | translate}}</span></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-4"
+                 ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.primaryContactPhone.$invalid}">
+                <label for="primary-contact-phone" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.primaryContactPhone'
+                    | translate}}
+                </label> <input id="primary-contact-phone" name="primaryContactPhone" type="text"
+                                placeholder="ex. 313-766-1890"
+                                class="form-control" ng-model="createRequestCtrl.RFADetails.primaryContactPhoneNumber"
+                                required>
+
+                <div><span class="label label-danger"
+                           ng-show="createRequestCtrl.isFormSubmitted && createRequest.primaryContactPhone.$invalid"><span
+                        class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.primaryContactPhone' | translate}}</span></span>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="primary-contact-email" class="control-label"> {{'createRequest.primaryContactEmail'
+                    | translate}}</label>
+                <input id="primary-contact-email" type="email" placeholder="ex. jsmith@ford.com"
+                       class="form-control" ng-model="createRequestCtrl.RFADetails.primaryContactEmailId">
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="technician-name" class="control-label"> {{'createRequest.technicianName'
+                    | translate}}</label>
+                <input
+                        id="technician-name" type="text" placeholder="Enter technician name"
+                        class="form-control" ng-model="createRequestCtrl.RFADetails.technicianName">
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="technician-speciality" class="control-label">{{'createRequest.technicianSpeciality'
+                    | translate}}</label>
+                <select id="technician-speciality" class="form-control"
+                        ng-model="createRequestCtrl.RFADetails.isTechnicianCertified"
+                        ng-init="createRequestCtrl.RFADetails.isTechnicianCertified=createRequestCtrl.isTechnicianCertified">
+                    <option value="PSL">---Please Select---</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                    <option value="A">N/A</option>
+                </select>
+            </div>
+        </accordion-group>
+        <accordion-group is-open="createRequestCtrl.status.isOpenDelearInfo">
+            <accordion-heading class="h2">
+                <span>{{'createRequest.dealerInfo' | translate}}</span>
+                <a ng-click="show3 = !show3" class="pull-right" ng-show="show3">{{'searchRequests.show'
+                    | translate}}</a>
+                <a class="pull-right" ng-click="show3 = !show3" ng-show="!show3">{{'searchRequests.hide'
+                    | translate}}</a>
+            </accordion-heading>
+            <div class="form-group col-sm-12">
+                <label class="no-bg-label" for="not-dealer-specific" ng-click="createRequestCtrl.isDealerSpecific()">
+                    <input type="checkbox"
+                           id="not-dealer-specific" ng-model="createRequestCtrl.notDealerSpecific">
+                    {{'createRequest.notDealerSpecific' | translate}}
+                </label>
+            </div>
+            <p class="form-group col-sm-12" ng-if="!createRequestCtrl.notDealerSpecific">
+                <button class="btn btn-secondary2" data-toggle="modal" ng-click="createRequestCtrl.selectDealer();">
+                    {{'createRequest.selectDealer' | translate}}
+                </button>
+            </p>
+
+            <div ng-if="(!createRequestCtrl.selectedDealerDetails&&!createRequestCtrl.trackingNumber&&!createRequestCtrl.gcqisReportDetail)||createRequestCtrl.notDealerSpecific">
+                <div class="form-group col-sm-4"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.dealerName.$invalid}">
+                    <label for="text" class="control-label control-label"> <abbr
+                            class="required h6" title="Required">*</abbr>{{'createRequest.dealershipName' | translate}}</label>
+
+                    <p class="form-control-static">
+
+            	 <span ng-if="!createRequestCtrl.notDealerSpecific"><input type="text" name="dealerName"
+                                                                           class="form-control" disabled
+                                                                           ng-model="dealerName" required/>
+            	 <div><span class="label label-danger"
+                            ng-show="createRequestCtrl.isFormSubmitted && createRequest.dealerName.$invalid"><span
+                         class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.dealershipName' | translate}}</span></span>
+                 </div>
+            	 </span>
+
+                        <strong><span ng-if="createRequestCtrl.notDealerSpecific">Not Dealer Specific</span></strong>
+
+                    </p>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label">{{'createRequest.PACode' | translate}}</label>
+
+                    <p class="form-control-static" ng-if="createRequestCtrl.notDealerSpecific">
+                        <strong> <span>N/A</span></strong>
+                    </p>
+                </div>
+                <div class="form-group col-sm-4"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.geographicRegion.$invalid}">
+                    <label for="geo-region" class="control-label control-label"> <abbr
+                            class="required h6" title="Required">*</abbr>{{'createRequest.geographicRegion' |
+                        translate}}</label>
+                    <select id="geo-region"
+                            class="form-control"
+                            ng-model="createRequestCtrl.geoRegionDetails"
+                            ng-options="request.description for request in createRequestCtrl.geoRegionList"
+                            ng-change="createRequestCtrl.getRFAGeoRegion()" name="geographicRegion" required>
+
+                        <option value="">Please select</option>
+                    </select>
+
+                    <div><span class="label label-danger"
+                               ng-show="createRequestCtrl.isFormSubmitted && createRequest.geographicRegion.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.geographicRegion' | translate}}</span></span>
+                    </div>
+
+                </div>
+                <div class="form-group col-sm-4" ng-if="!createRequestCtrl.notDealerSpecific">
+                    <label for="text" class="control-label"> {{'createRequest.facingRegion' | translate}}</label>
+
+                    <p class="form-control-static">
+                        {{createRequestCtrl.selectedDealerDetails.facingRegionDescription}}
+                    </p>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="FCSD-sales-zone" class="control-label">{{'createRequest.FCSDSalesZone' |
+                        translate}}</label>
+                    <select ng-init="createRequestCtrl.RFADetails.salesZone = 'NZS'" id="FCSD-sales-zone"
+                            class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.salesZone">
+                        <option ng-selected="createRequestCtrl.RFADetails.salesZone=='NZS'" value="NZS">Not Zone
+                            Specific
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="FCSD-technical-zone" class="control-label">{{'createRequest.FCSDTechnicalZone' |
+                        translate}}</label>
+                    <select ng-init="createRequestCtrl.RFADetails.technicalZone = 'NZS'" id="FCSD-technical-zone"
+                            class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.technicalZone">
+                        <option ng-selected="createRequestCtrl.RFADetails.technicalZone=='NZS'" value="NZS">Not Zone
+                            Specific
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div ng-if="(createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail)&&(!createRequestCtrl.notDealerSpecific)">
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label"> {{'createRequest.dealershipName' | translate}}</label>
+
+                    <p class="form-control-static">
+                        <strong> <span
+                                ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.dealerName}}</span></strong>
+                    </p>
+
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label">{{'createRequest.PACode' | translate}}</label>
+
+                    <p class="form-control-static">
+                        <strong> <span
+                                ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.pandACode}}</span></strong>
+                    </p>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label"> {{'createRequest.geographicRegion' | translate}}</label>
+
+                    <p class="form-control-static">
+                        <strong><span ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.geoRegionDescription}}</span></strong>
+                    </p>
+                </div>
+                <div class="form-group col-sm-4" ng-if="!createRequestCtrl.notDealerSpecific">
+                    <label for="text" class="control-label"> {{'createRequest.facingRegion' | translate}}</label>
+
+                    <p class="form-control-static">
+                        <strong> <span
+                                ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.facingRegionDescription}}</span></strong>
+                    </p>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label">{{'createRequest.FCSDSalesZone' | translate}}</label>
+
+                    <p class="form-control-static">
+                        <strong><span ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.salesZone}}</span></strong>
+                    </p>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="text" class="control-label">{{'createRequest.FCSDTechnicalZone' | translate}}</label>
+
+                    <p>
+                        <strong> <span
+                                ng-if="createRequestCtrl.selectedDealerDetails||createRequestCtrl.trackingNumber||createRequestCtrl.gcqisReportDetail">{{createRequestCtrl.RFADetails.technicalZone}}</span></strong>
+                    </p>
+                </div>
+            </div>
+        </accordion-group>
+
+        <accordion-group is-open="createRequestCtrl.status.isOpenVehicleInfo">
+            <accordion-heading class="h2">
+                <span>{{'createRequest.vehicleInfo' | translate}}</span>
+                <a ng-click="show4 = !show4" class="pull-right" ng-show="show4">{{'searchRequests.show'
+                    | translate}}</a>
+                <a class="pull-right" ng-click="show4 = !show4" ng-show="!show4">{{'searchRequests.hide'
+                    | translate}}</a></accordion-heading>
+
+            <div class="form-group col-sm-4"
+                 ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.vinNumber.$invalid}"
+                    >
+                <label for="VIN" class="control-label"> <abbr class="required h6" title="Required">*</abbr>{{'createRequest.VIN'
+                    | translate}} </label>
+                <input id="VIN" type="text" placeholder="ex. NXXXXXXXXXXXXXX"
+                       class="form-control" ng-model="createRequestCtrl.RFADetails.vinNumber" name="vinNumber" required
+                       vin-number maxLength="17"/>
+
+                <div>
+	        <span class="label label-danger"
+                  ng-show="createRequestCtrl.isFormSubmitted && createRequest.vinNumber.$invalid">
+
+		         <span class="error"
+                       ng-show="createRequestCtrl.isFormSubmitted && createRequest.vinNumber.$error.required">
+		       		       <span class="glyphicon glyphicon-remove-circle"></span>
+		        				<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}} VIN Number</span>
+		         			</span>
+		         			<span class="error"
+                                  ng-show="createRequestCtrl.isFormSubmitted && createRequest.vinNumber.$error.max">
+		       		       <span class="glyphicon glyphicon-remove-circle"></span>
+		        				<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}} {{'createRequest.VIN' | translate}} </span>
+		         			</span>
+                </span>
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group col-sm-4"
+                 ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.vehicleYearModel.$invalid}">
+                <label for="vehicle-year-model" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.vehicleYearModel' | translate}}
+                </label> <input id="vehicle-year-model" name="vehicleYearModel" type="text"
+                                placeholder="ex. 2012 Fusion"
+                                class="form-control" ng-model="createRequestCtrl.RFADetails.vehicleInfoModelYear"
+                                required>
+                    <span class="label label-danger"
+                          ng-show="createRequestCtrl.isFormSubmitted && createRequest.vehicleYearModel.$invalid">
+	              			 <span class="glyphicon glyphicon-remove-circle"></span>
+			                 <span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.vehicleYearModel' | translate}}</span>
+					</span>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="vehicle-mileage" class="control-label"> {{'createRequest.vehicleMileage' |
+                    translate}}</label> <input
+                    id="vehicle-mileage" type="text" placeholder="ex. 58000" class="form-control"
+                    ng-model="createRequestCtrl.RFADetails.vehicleMileage">
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="required-order-number" class="control-label"> {{'createRequest.repairOrderNumber' |
+                    translate}}</label>
+                <input
+                        id="required-order-number" type="text" placeholder="ex. ZYYYYYYYYY"
+                        class="form-control" ng-model="createRequestCtrl.RFADetails.repairOrderNumber">
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="customer-name" class="control-label"> {{'createRequest.customerName' | translate}}</label>
+                <input
+                        id="customer-name" type="text" placeholder="Enter customer name"
+                        class="form-control" ng-model="createRequestCtrl.RFADetails.customerName">
+            </div>
+            <div class="form-group col-sm-4"
+                 ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.vehicleDown.$invalid}">
+                <label for="vehicle-down" class="control-label"> <abbr
+                        class="required h6" title="Required">*</abbr>{{'createRequest.vehicleDown' | translate}}</label>
+                <select
+                        id="vehicle-down" name="vehicleDown" class="form-control"
+                        ng-model="createRequestCtrl.RFADetails.vehicleDown" required
+                        ng-init="createRequestCtrl.RFADetails.vehicleDown=createRequestCtrl.vehicleDown">
+                    <option value="PSL">---Please Select---</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                    <option value="A">N/A</option>
+                </select>
+                <span class="label label-danger"
+                      ng-show="createRequestCtrl.isFormSubmitted && createRequest.vehicleDown.$invalid">
+	              			 <span class="glyphicon glyphicon-remove-circle"></span>
+			                 <span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.vehicleDown' | translate}}</span>
+					</span>
+            </div>
+            <div class="form-group col-sm-4">
+                <label class="control-label">{{'createRequest.TAROpen' | translate}}</label>
+
+                <p class="form-control-static">
+                    {{createRequestCtrl.RFADetails.isTarOpen}}
+                    <button type="button" class="btn btn-secondary2"
+                            ng-disabled="createRequestCtrl.gcqisAccess.gcqisAccess"
+                            ng-click="createRequestCtrl.refreshCommentsTar();">{{'createRequest.refresh' | translate}}
+                    </button>
+                </p>
+            </div>
+            <div class="form-group col-sm-4"
+                 ng-if="applicationCtrl.userInformation.country == 'USA' || applicationCtrl.userInformation.country == 'CAN'">
+                <label for="case-number" class="control-label"> {{'createRequest.caseNumber' | translate}}</label>
+                <input
+                        id="case-number" type="text" placeholder="ex. RXXXXXXXXXXXX"
+                        class="form-control" ng-model="createRequestCtrl.RFADetails.cudlCaseNumber">
+            </div>
+        </accordion-group>
+
+        <accordion-group is-open="createRequestCtrl.status.isOpenFSCDetails"
+                         ng-if="createRequestCtrl.RFADetails.rfaStatus=='2'||createRequestCtrl.RFADetails.rfaStatus=='3'">
+            <accordion-heading class="h2"><span>{{'createRequest.FSCDetails' | translate}}</span> <a
+                    ng-click="show4 = !show4" class="pull-right" ng-show="show4">{{'searchRequests.show'
+                | translate}}</a> <a class="pull-right" ng-click="show4 = !show4" ng-show="!show4">{{'searchRequests.hide'
+                | translate}}</a>
+            </accordion-heading>
+            <fieldset class="col-sm-4 panel panel-default">
+                <legend class="panel-heading"> {{'createRequest.comments' | translate}}</legend>
+                <div class="form-group">
+                    <label for="FSC-comments" class="control-label"> {{'createRequest.FSCComments' | translate}}</label>
+          <textarea id="FSC-comments" rows="2" size="5" cols="3" maxlength="2500" placeholder="Enter your comments here"
+                    class="form-control" ng-model="createRequestCtrl.RFADetails.fseComments"></textarea>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.concernSummary.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'}"
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="concern-summary" class="control-label">{{'createRequest.concernSummaryForDealerContactReport'
+                        |
+                        translate}}</label>
+          <textarea id="concern-summary" rows="2" cols="48" placeholder="Enter your summary here" name="concernSummary"
+                    class="form-control" ng-model="createRequestCtrl.RFADetails.concernSummary"
+                    ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"></textarea>
+
+                    <div><span class="label label-danger"
+                               ng-show="createRequestCtrl.isFormSubmitted && createRequest.concernSummary.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.concernSummaryForDealerContactReport' | translate}}</span></span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.inspectionComments.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'}"
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="inspection-comments" class="control-label">{{'createRequest.inspectionCommentsForDealerContactReport'
+                        |
+                        translate}}</label>
+          <textarea id="inspection-comments" rows="2" cols="48" placeholder="Enter your comments here"
+                    name="inspectionComments"
+                    class="form-control"
+                    ng-model="createRequestCtrl.RFADetails.inspectionComments" value=""
+                    ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"></textarea>
+
+                    <div><span class="label label-danger"
+                               ng-show="createRequestCtrl.isFormSubmitted && createRequest.inspectionComments.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.inspectionCommentsForDealerContactReport' | translate}}</span></span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.recommendations.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'}"
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="recommendations" class="control-label">{{'createRequest.recommendationForDealerContactReport'
+                        |
+                        translate}}</label>
+          <textarea id="recommendations" rows="2" cols="48" placeholder="Enter your recommendations here"
+                    name="recommendations"
+                    class="form-control"
+                    ng-model="createRequestCtrl.RFADetails.recommendationForTAR"
+                    ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"></textarea>
+
+                    <div><span class="label label-danger"
+                               ng-show="createRequestCtrl.isFormSubmitted && createRequest.recommendations.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR'"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.recommendationForDealerContactReport' | translate}}</span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="missing-tools" class="control-label">{{'createRequest.missingToolsEquipment' |
+                        translate}}</label>
+          <textarea id="missing-tools" rows="2" cols="48"
+                    placeholder="Enter any missing tools or equipment here"
+                    class="form-control"
+                    ng-model="createRequestCtrl.RFADetails.missingToolsDuringVisit"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="missing-tools-ordered" class="control-label">{{'createRequest.missingToolsEquipmentOrderedDuringVisit'
+                        | translate}}</label>
+                    <select id="missing-tools-ordered" class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.isMissingTools"
+                            ng-init="createRequestCtrl.RFADetails.isMissingTools='PSL'">
+                        <option value="PSL">---Please Select---</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+            </fieldset>
+            <fieldset class="col-sm-4 panel panel-default">
+                <legend class="panel-heading">{{'createRequest.initialContact' | translate}}</legend>
+                <div class="form-group datepicker-container"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.initialContactDate.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.initialContactDate.$invalid}">
+                    <label for="initial-contact-date" class="control-label"><abbr
+                            class="required h6" title="Required">*</abbr> {{'createRequest.initialContactDate' |
+                        translate}}</label>
+
+                    <div class="input-group">
+                        <input type="text" id="initial-contact-date" name="initialContactDate"
+                               datepicker-popup="dd-MMM-yyyy" datepicker-options="createRequestCtrl.datePickerOptions"
+                               is-open="createRequestCtrl.initialContactDate"
+                               ng-model="createRequestCtrl.RFADetails.initialContactDate" class="form-control"
+                               show-button-bar="false" placeholder="dd-MMM-yyyy"
+                               ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.requiredExportGCQIS.status == 'All' && createRequestCtrl.requiredExportGCQIS.required == 'Yes'"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-secondary"
+                            ng-click="createRequestCtrl.open($event, 'initialContactDate')">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+				</span>
+                    </div>
+
+                    <div>
+          <span class="label label-danger"
+                ng-show="createRequestCtrl.isFormSubmitted && createRequest.initialContactDate.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.initialContactDate.$invalid"><span
+                  class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.initialContactDate' | translate}}</span></span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.personContacted.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.personContacted.$invalid}">
+                    <label for="text" class="control-label"><abbr
+                            class="required h6" title="Required">*</abbr> {{'createRequest.personContacted' |
+                        translate}}</label>
+                    <input id="text" type="text"
+                           placeholder="ex. Mary Smith"
+                           class="form-control" ng-model="createRequestCtrl.RFADetails.personContacted"
+                           name="personContacted"
+                           ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.requiredExportGCQIS.status == 'All' && createRequestCtrl.requiredExportGCQIS.required == 'Yes'">
+
+                    <div><span class="label label-danger"
+                               ng-show="createRequestCtrl.isFormSubmitted && createRequest.personContacted.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' && createRequestCtrl.RFADetails.requestTypeCode == 'TAR' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.personContacted.$invalid"><span
+                            class="glyphicon glyphicon-remove-circle"></span><span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.personContacted' | translate}}</span></span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.visit.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'}">
+                    <label for="visit" class="control-label"> {{'createRequest.dealershipVisitPlanned' |
+                        translate}}</label>
+                    <select id="visit" class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.isDealerVisitPlanned" name="visit"
+                            ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'">
+                        <option value>---Please Select---</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+
+                    <div>
+
+	          <span class="label label-danger"
+                    ng-show="createRequestCtrl.isFormSubmitted && createRequest.visit.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'">
+	          	  <span class="glyphicon glyphicon-remove-circle"></span>
+	            	<span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.dealershipVisitPlanned' | translate}}</span>
+	           </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.actualVisitDate.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.actualVisitDate.$invalid && createRequestCtrl.RFADetails.isDealerVisitPlanned == 'Y'}">
+                    <div class="form-group  datepicker-container">
+                        <label for="visit-date" class="control-label">{{'createRequest.visitDateIfPlanned' |
+                            translate}}</label>
+
+                        <div class="input-group">
+
+                            <input type="text" id="visit-date" name="actualVisitDate"
+                                   datepicker-popup="dd-MMM-yyyy"
+                                   datepicker-options="createRequestCtrl.datePickerOptions"
+                                   is-open="createRequestCtrl.actualVisitDate"
+                                   ng-model="createRequestCtrl.RFADetails.actualVisitDate" class="form-control"
+                                   show-button-bar="false" placeholder="MMM-dd-yyyy"
+                                   ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' || createRequestCtrl.requiredExportGCQIS.status == 'All' &&  createRequestCtrl.RFADetails.isDealerVisitPlanned == 'Y' && createRequestCtrl.requiredExportGCQIS.required == 'Yes'"/>
+              <span class="input-group-btn">
+              <button type="button" class="btn btn-secondary"
+                      ng-click="createRequestCtrl.open($event, 'actualVisitDate')"><i
+                      class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+
+                        </div>
+                        <div>
+	          <span class="label label-danger"
+                    ng-show="createRequestCtrl.isFormSubmitted && createRequest.actualVisitDate.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned' || createRequestCtrl.isGCQISReporFormSubmitted && createRequest.actualVisitDate.$invalid && createRequestCtrl.RFADetails.isDealerVisitPlanned == 'Y'">
+	          	  <span class="glyphicon glyphicon-remove-circle"></span>
+	            	<span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.visitDateIfPlanned' | translate}}</span>
+	           </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.visitOccur.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'}">
+                    <label for="visit-occur" class="control-label">{{'createRequest.didTheVisitOccur' |
+                        translate}}</label>
+                    <select id="visit-occur" class="form-control"
+                            ng-model="createRequestCtrl.RFADetails.isActualDealerVisitOccur" name="visitOccur"
+                            ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'">
+                        <option value="">---Please Select---</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+
+                    <div>
+	          <span class="label label-danger"
+                    ng-show="createRequestCtrl.isFormSubmitted && createRequest.visitOccur.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'">
+	          	  <span class="glyphicon glyphicon-remove-circle"></span>
+	            	<span class="label-text">{{'createRequest.isRequiredErrorSelect' | translate}}   {{'createRequest.didTheVisitOccur' | translate}}</span>
+	           </span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary2" title="Export To GCQIS"
+                            ng-click="createRequestCtrl.exportGCQIS();">{{'createRequest.exportToGCQIS' | translate}}
+                    </button>
+                </div>
+            </fieldset>
+            <fieldset class="col-sm-4 panel panel-default"
+                      ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                <legend class="panel-heading">{{'createRequest.rootCauses' | translate}}</legend>
+                <div class="form-group"
+
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="primary-root-cause" class="control-label"> {{'createRequest.primaryRootCause' |
+                        translate}}</label>
+                    <select id="primary-root-cause" class="form-control" name="primaryRootCause"
+                            ng-change="createRequestCtrl.otherFiled()"
+                            ng-model="createRequestCtrl.RFADetails.rootCauseCode"
+
+                            ng-options="request.code as request.description for request in createRequestCtrl.rootCauseData">
+
+                    </select>
+
+                </div>
+                <div class="form-group"
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="additional-root-cause" class="control-label">{{'createRequest.additionalRootCauses' |
+                        translate}}</label>
+
+
+                    <ui-select id="additional-root-cause" multiple
+                               ng-model="createRequestCtrl.RFADetails.otherRootCauseList" class="rootCause"
+                               ng-disabled="createRequestCtrl.disabled.empty || createRequestCtrl.disabled.OTR"
+                               ng-change="createRequestCtrl.additionalRootCauses()">
+                        <ui-select-match placeholder="Select Cause">{{$item.description}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                repeat="additionalRootCauses.code as additionalRootCauses in createRequestCtrl.additionalRootCausesData">
+                            {{additionalRootCauses.description}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group"
+                     ng-hide="createRequestCtrl.RFADetails.requestSourceCode == 'BBB' || createRequestCtrl.RFADetails.requestSourceCode == 'LGL' || createRequestCtrl.RFADetails.requestSourceCode == 'CAT' || createRequestCtrl.RFADetails.requestTypeCode == 'LGL'">
+                    <label for="explain" class="control-label">{{'createRequest.explainIfOther' | translate}}</label>
+          <textarea id="explain" rows="2" cols="48" placeholder=""
+                    ng-disabled="createRequestCtrl.disabled.empty || createRequestCtrl.disabled.notOTR || createRequestCtrl.disabled.notOTRotherRootCause"
+                    class="form-control" ng-model="createRequestCtrl.RFADetails.otherRootCause"></textarea>
+                </div>
+            </fieldset>
+            <fieldset class="col-sm-4 panel panel-default">
+                <legend class="panel-heading">{{'createRequest.hours' | translate}}</legend>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.totalSpentHours.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'}">
+                    <label for="total-spent-hours" class="control-label"> {{'createRequest.totalTimeSpentInHours' |
+                        translate}}</label>
+                    <input id="total-spent-hours" name="totalSpentHours" type="text" placeholder="ex. 10"
+                           class="form-control"
+                           ng-model="createRequestCtrl.RFADetails.totalHoursSpent"
+                           ng-required="createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'" hour-spent
+                           ng-pattern="/^[0-9]+(?:\.[0-9]+)?$/">
+
+                    <div>
+          	<span class="label label-danger"
+                  ng-show="createRequestCtrl.isFormSubmitted && createRequest.totalSpentHours.$invalid && createRequestCtrl.RFADetails.rfaStatusDescription == 'Assigned'">
+
+          	<span class="error" ng-show="createRequest.totalSpentHours.$error.required">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.totalTimeSpentInHours' | translate}}</span>
+          	</span>
+          	 <span class="error" ng-show="createRequest.totalSpentHours.$error.pattern">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.validFormat' | translate}}</span>
+          	</span>
+
+          	<span class="error" ng-show="createRequest.totalSpentHours.$error.lessthan">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}    {{'createRequest.lessThan' | translate}}</span>
+          	</span>
+
+          	<span class="error" ng-show="createRequest.totalSpentHours.$error.notzero">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.totalTimeSpentInHours' | translate}}</span>
+          	</span>
+
+          	</span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.travelTime.$invalid}">
+                    <label for="travel-time" class="control-label"> {{'createRequest.totalTravelTimeSpentInHours' |
+                        translate}}</label>
+                    <input id="travel-time" name="travelTime" type="text" min="0" max="9999.9" placeholder="ex. 5"
+                           class="form-control"
+                           ng-model="createRequestCtrl.RFADetails.totalTimeSpent">
+
+                    <div>
+          	<span class="label label-danger"
+                  ng-show="createRequestCtrl.isFormSubmitted && createRequest.travelTime.$invalid">
+          	<span ng-show="createRequest.travelTime.$error.required">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.totalTravelTimeSpentInHours' | translate}}</span>
+          	</span>
+          	<span ng-show="createRequest.travelTime.$error.min || createRequest.travelTime.$error.max">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   value in range 0 to 9999</span>
+          	</span>
+          	</span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{'has-error': createRequestCtrl.isFormSubmitted && createRequest.travelCost.$invalid}">
+                    <label for="travel-cost" class="control-label"> {{'createRequest.totalTravelCostSpentInDollars' |
+                        translate}}</label>
+                    <input id="travel-cost" name="travelCost" type="text" min="0" max="9999.9" placeholder="ex. 20"
+                           class="form-control"
+                           ng-model="createRequestCtrl.RFADetails.totalCost">
+
+                    <div>
+          	<span class="label label-danger"
+                  ng-show="createRequestCtrl.isFormSubmitted && createRequest.travelCost.$invalid">
+          	<span ng-show="createRequest.travelCost.$error.required">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   {{'createRequest.totalTravelCostSpentInDollars' | translate}}</span>
+          	</span>
+          	<span ng-show="createRequest.travelCost.$error.min || createRequest.travelCost.$error.max">
+          		<span class="glyphicon glyphicon-remove-circle"></span>
+          		<span class="label-text">{{'createRequest.isRequiredErrorEnter' | translate}}   value in range 0 to 9999</span>
+          	</span>
+          	</span>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group col-md-12 float-left">
+                <label for="attach-files" class="control-label">{{'createRequest.attachFiles' | translate}}</label>
+
+                <input class="btn btn-primary" type="file" file-model='createRequestCtrl.fileModel' id="attach-files"/>
+
+
+                <div ng-if="createRequestCtrl.maxFileSize" class="col-xs-12">
+                            <span class="label label-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="label-text">{{'createRequest.fileSizeError' | translate}}</span>
+                                </span>
+                </div>
+
+                <div>
+                    <ul class="fileList">
+                        <li class="col-xs-12" ng-repeat="file in createRequestCtrl.RFADetails.attachmentList">
+                        <span class="col-xs-8 col-sm-6">
+                        <a id="fileDownload" ng-click="createRequestCtrl.downloadFile($index)"><span>{{file.attachmentFileName}}</span></a>
+                        <span>{{file.attachmentFileSize}} KB</span>
+                        </span>
+                            <span class="col-xs-4 col-sm-6">
+                            <button type="button" class="btn btn-danger btn-xs"
+                                    ng-click="createRequestCtrl.removeFile($index, 'removeFile'); createRequestCtrl.removeFileFromList($index)">
+                                Remove
+                            </button>
+                                 </span>
+                        </li>
+                    </ul>
+
+                    <p class="col-xs-12"  ng-if="createRequestCtrl.uploadAction=='removeFile'">{{'createRequest.attachedRemoved' |
+                        translate}}</p>
+
+                    <p class="col-xs-12"  ng-if="createRequestCtrl.uploadAction=='uploadFile'">{{'createRequest.attachSuccess' |
+                        translate}}</p>
+
+                    <p class="col-xs-12"  ng-if="createRequestCtrl.RFADetails.attachmentList.length==0">
+                        {{'createRequest.noAttachment' |
+                        translate}}</p>
+                </div>
+
+
+            </div>
+        </accordion-group>
+    </accordion>
+
+
+    <div class="row">
+        <div class="form-horizontal col-sm-4">
+            <div class="form-group form-group-primary"
+                 ng-if="createRequestCtrl.showOnlyCancel.allStatus"
+                    >
+                <label for="select-action" class="control-label no-bg-label">{{'createRequest.selectAction'
+                    | translate}} :</label>
+                <select
+                        class="form-control" id="select-action" name="select-action"
+                        ng-model="createRequestCtrl.selectedAction" ng-required="true">
+
+                    <option value="save" ng-if="createRequestCtrl.saveBtn.allStatus">{{'createRequest.saveRequest' |
+                        translate}}
+                    </option>
+
+                    <option value="submit/Assign" ng-if="createRequestCtrl.submitAndAssign.allStatus">
+                        {{'createRequest.submitAndAssign'| translate}}
+                    </option>
+
+                    <option value="close" ng-if="createRequestCtrl.closeRequest.allStatus">
+                        {{'createRequest.closeRequest'| translate}}
+                    </option>
+
+                    <option value="returnToDispatcher" ng-if="createRequestCtrl.returnToDispatcher.allStatus">
+                        {{'createRequest.returnToDispatcher' | translate}}
+                    </option>
+
+                    <option value="emailSummary" ng-if="createRequestCtrl.emailSummary.allStatus">
+                        {{'createRequest.emailSummary' | translate}}
+                    </option>
+
+                    <option value="bypassDispatcher" ng-if="createRequestCtrl.bypassDispatcher.allStatus">
+                        {{'createRequest.bypassDispatcher'| translate}}
+                    </option>
+
+                    <option value="emailContactReport" ng-if="createRequestCtrl.emailContactReport.allStatus"
+                            ng-hide="createRequestCtrl.shoudeHideEmailContactIfTrue.value">
+                        {{'createRequest.emailContactReport' | translate}}
+                    </option>
+
+
+                    <option value="delete" ng-if="createRequestCtrl.deleteBtn.allStatus">
+                        {{'createRequest.deleteRequest'| translate}}
+                    </option>
+
+                </select>
+                <span class="input-group-btn"> </span>
+
+                <div> <span class="label label-danger"
+                            ng-show="createRequestCtrl.isFormSubmitted && createRequest.select-action.$invalid"><span
+                        class="glyphicon glyphicon-remove-circle"></span><span
+                        class="label-text">{{'createRequest.isRequiredErrorEnter' |
+          translate}} {{'createRequest.selectAction' | translate}}</span></span>
+                </div>
+            </div>
+            <div class="text-center form-group row">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <button class="btn btn btn-primary" type="button"
+                                title="btn-submit" id="btn-submit" ng-if="createRequestCtrl.showOnlyCancel.allStatus"
+                                ng-click="createRequestCtrl.chooseAction()">{{'buttons.submit'
+                            | translate}}
+                        </button>
+                    </div>
+                    <div class="col-xs-6 text-left">
+                        <button type="button" class="btn btn-secondary" title="Cancel"
+                                id="cancel" ui-sref="home">Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <span ng-if="createRequestCtrl.trackingNumber||createRequestCtrl.updatedRFADetails">
+       <p>{{'createRequest.createdBy' | translate}}
+           <span ng-if="createRequestCtrl.trackingNumber">{{createRequestCtrl.RFADetails.createdByCDSId}} {{createRequestCtrl.RFADetails.createdDate}}</span>
+           <span ng-if="createRequestCtrl.updatedRFADetails&&!createRequestCtrl.trackingNumber">{{createRequestCtrl.RFADetails.createdByCDSId}} {{createRequestCtrl.updatedRFADetails.createdDate}}</span>
+       </p>
+       <p>{{'createRequest.lastRevisedBy' | translate}}
+           <span ng-if="createRequestCtrl.trackingNumber">{{createRequestCtrl.RFADetails.lastUpdatedByCDSID}} {{createRequestCtrl.RFADetails.lastUpdatedDate}}</span>
+           <span ng-if="createRequestCtrl.updatedRFADetails&&!createRequestCtrl.trackingNumber">{{createRequestCtrl.RFADetails.lastUpdatedByCDSID}} {{createRequestCtrl.updatedRFADetails.lastUpdatedDate}}</span>
+       </p>
+      </span>
+</form>

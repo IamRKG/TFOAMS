@@ -1,0 +1,9 @@
+<h2>{{'reports.title' | translate}}</h2>
+    
+<p>{{'reports.instructions' | translate}}</p>
+
+<div class="list-group report-list">
+	<div class="h4" ng-repeat="reports in reportsCtrl.reportsList">
+		<a ng-href="#/reports/{{reports.reportType}}"><span>{{reports.name}}</span></a>
+	</div>
+</div>

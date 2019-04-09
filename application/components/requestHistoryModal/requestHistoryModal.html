@@ -1,0 +1,45 @@
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true" ng-click="requestHistoryModalInstanceCtrl.reject()">&times;</button>
+    <h1 class="modal-title">{{'createRequest.showRequestHistory.title' | translate}}</h1>
+</div>
+
+<div class="modal-body">
+
+    <p class="h2">{{'createRequest.trackingNo' | translate}} {{requestHistoryModalInstanceCtrl.trackingNumber}}</p>
+
+    <p class="h2">{{'createRequest.status' | translate}} {{requestHistoryModalInstanceCtrl.rfaStatusDescription}} to
+        {{requestHistoryModalInstanceCtrl.currentAssignee}}</p>
+
+	<h5 class="pull-left">{{'reports.swipeTableInstructions' | translate}} <span class="glyphicon glyphicon-chevron-right"></span></h5>
+    <div class="table-responsive" id="show-request-history">
+        <div datatable="{{requestHistoryModalInstanceCtrl.RFAHistoryTable.overrideOptions}}"
+             columns="requestHistoryModalInstanceCtrl.RFAHistoryTable.columns"
+             column-defs="{{requestHistoryModalInstanceCtrl.RFAHistoryTable.columnDefs}}"
+             data="requestHistoryModalInstanceCtrl.RFAHistoryDetails.historyList">
+
+            <table class="table table-bordered table-striped">
+                <caption class="hidden">
+                    {{'createRequest.showRequestHistory.title' | translate}}
+                </caption>
+                <thead>
+                <tr>
+                    <th scope="col">{{'createRequest.showRequestHistory.updatedBy' | translate}}</th>
+                    <th scope="col">{{'createRequest.showRequestHistory.dateUpdated' | translate}}</th>
+                    <th scope="col">{{'createRequest.showRequestHistory.action' | translate}}</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer form-actions">
+    <button id="cancel" type="button" class="btn btn-default" ng-click="requestHistoryModalInstanceCtrl.reject()">
+        {{'createRequest.showRequestHistory.closeWindow'
+        | translate}}
+    </button>
+
+</div>

@@ -1,0 +1,84 @@
+<div class="modal-header">
+<button type="button" class="close" aria-label="Close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<h1 class="modal-title">{{'reports.dealerDetails' | translate}}</h1>
+</div>
+<div class="modal-body">
+	<div class="form-horizontal primary-section">
+		<div class="form-group form-group-primary form-group-secondary">
+			<label class="col-xs-5 control-label no-bg-label h4">{{modalOptions.trackingNumber}}
+				&num; &colon; </label>
+			<div class="col-xs-7">
+				<p class="form-control-static"><strong>{{modalOptions.data.trackingNumber}}</strong> </p>
+			</div>
+		</div>
+		<div class="form-group form-group-primary form-group-secondary">
+			<label class="col-xs-5 control-label no-bg-label h4">{{modalOptions.dealerNumber}}
+				&num;    &colon;</label>
+			<div class="col-xs-7">
+				<p class="form-control-static"><strong>{{modalOptions.data.dealerName}}</strong></p>
+			</div>
+		</div>
+		<div class="form-group form-group-primary form-group-secondary">
+			<label class="col-xs-5 control-label no-bg-label h4">{{modalOptions.vehicle}} &colon;
+			</label>
+			<div class="col-xs-7">
+				<p class="form-control-static"><strong>{{modalOptions.data.vehicle}}</strong></p>
+			</div>
+		</div>
+		<div class="form-group form-group-primary form-group-secondary">
+			<label class="col-xs-5 control-label no-bg-label h4"><b>{{modalOptions.paCode}} &colon;
+			</b></label>
+			<div class="col-xs-7">
+				<p class="form-control-static"><strong>{{modalOptions.data.pacode}}</strong></p>
+			</div>
+		</div>
+		</div>
+
+  <div class="form-horizontal">
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b> {{modalOptions.requestType}}
+				  </b></label>
+		<div class="input-group">
+			<p class="form-control-static">{{modalOptions.data.requestType}}</p>
+		</div>
+	</div>
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b>{{modalOptions.gcqisNumber}}
+				&num;   </b></label>
+		<div class="input-group">
+			<p class="form-control-static">{{modalOptions.data.gcqisNumber}}</p>
+		</div>
+	</div>
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b>{{modalOptions.primaryContact}}
+				&num;   </b></label>
+		<div class="input-group">
+			<p class="form-control-static">{{modalOptions.data.primaryContact}}</p>
+		</div>
+	</div>
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b>{{modalOptions.phone}}</b></label>
+		<div class="input-group">
+			<p class="form-control-static">{{modalOptions.data.phone}}</p>
+		</div>
+	</div>
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b>{{modalOptions.status}}
+		 </b></label>
+		<div class="input-group">
+			<p class="form-control-static">{{modalOptions.data.statusDescription}}</p>
+		</div>
+	</div>
+
+	<div class="form-group form-group-primary form-group-secondary">
+		<label class="control-label no-bg-label"><b> {{modalOptions.fscComments}}
+				  </b></label>
+		<div class="input-group">
+			<p class="form-control-static fscComments">{{modalOptions.data.fseComments | maxArea:true:2500:'.'}}</p>
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary" ng-click="modalOptions.close()">{{modalOptions.actionButtonText}}</button>
+</div>

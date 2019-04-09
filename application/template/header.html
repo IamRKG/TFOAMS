@@ -1,0 +1,71 @@
+<header class="app-branding" role="banner">
+	<div class="row bg-light hidden-xs">
+		<div class="col-md-8 col-sm-8">	
+			<div class="media">
+				<a class="pull-left" href="#/"> <img class="media-object logo"
+					src="webCore/assets/image/Ford-Oval.png" alt="Ford Oval">
+				</a>
+				<div class="media-body">
+					<a class="media-heading" href="#/">{{'application.title' | translate}}</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4">
+
+		<ul class="list-group text-right">
+				<li class="list-group-item">
+					<span class="welcome-text" id="welcomeTxt">{{'application.welcomePhrase' | translate:applicationCtrl.userInformation}}</span>
+				</li>
+				<li class="list-group-item">
+					<span>{{'application.roleLabel'| translate}} </span>
+					<span ng-if="applicationCtrl.userInformation.jobRole=='SAD' || applicationCtrl.userInformation.jobRole=='PDP' || applicationCtrl.userInformation.jobRole=='GUR' || applicationCtrl.userInformation.jobRole=='OTR' || applicationCtrl.userInformation.jobRole=='FSE' || applicationCtrl.userInformation.jobRole=='MGR' || applicationCtrl.userInformation.jobRole=='SDP'">{{applicationCtrl.userInformation.jobRole}}, {{applicationCtrl.userInformation.country}}</a></span>
+					<span ng-if="applicationCtrl.userInformation.jobRole=='NAD' || applicationCtrl.userInformation.jobRole=='RAD'" >{{applicationCtrl.userInformation.jobRoleRAD}}, {{applicationCtrl.userInformation.country}}</a></span>
+				</li>
+			</ul>
+		
+		</div>
+	
+	</div>
+
+	<nav class="navbar navbar-default" role="navigation">
+			<div class="hidden-lg hidden-md hidden-sm navbar-header bg-info dker ">
+			<div class="pull-left nav" id="welcomeTxt">{{'application.welcomePhrase' | translate:applicationCtrl.userInformation}}</div>
+   			<div class="pull-right nav">{{'application.roleLabel'| translate}} 					
+   			<span ng-if="applicationCtrl.userInformation.jobRole=='SAD' || applicationCtrl.userInformation.jobRole=='PDP' || applicationCtrl.userInformation.jobRole=='GUR' || applicationCtrl.userInformation.jobRole=='OTR' || applicationCtrl.userInformation.jobRole=='FSE' || applicationCtrl.userInformation.jobRole=='MGR' || applicationCtrl.userInformation.jobRole=='SDP'">{{applicationCtrl.userInformation.jobRole}}, {{applicationCtrl.userInformation.country}}</a></span>
+			<span ng-if="applicationCtrl.userInformation.jobRole=='NAD' || applicationCtrl.userInformation.jobRole=='RAD'" >{{applicationCtrl.userInformation.jobRoleRAD}}, {{applicationCtrl.userInformation.country}}</a></span>
+			</div>
+		</div>
+			<div class="navbar-header bg-light">
+				<div class="media navbar-brand hidden-lg hidden-md hidden-sm col-xs-10">
+					<a class="pull-left" href="#/"> <img class="media-object logo"
+						src="webCore/assets/image/Ford-Oval.png" alt="Ford Oval">
+					</a>
+					<div class="media-body">
+						<a class="media-heading" href="#/">{{'application.title' | translate}}</a>
+					</div>
+				</div>
+				
+				<div class="col-xs-2 text-right">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+					<span class="sr-only">{{'application.navigation.toggleTitle'
+						| translate}}</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				</div>
+			</div>
+
+			<div class="navbar-collapse collapse" >
+    		
+					<ul class="nav navbar-nav" >
+					<li ui-sref-active="active"><a ui-sref="home" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.home' | translate}}</a></li>
+					<li ui-sref-active="active" ng-hide="applicationCtrl.userInformation.jobRole == 'SAD'" ><a ui-sref="createRequest" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.createRequest' | translate}}</a></li>
+					<li  ui-sref-active="active"ng-hide="applicationCtrl.userInformation.jobRole == 'SAD'" ><a ui-sref="searchRequests" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.searchForRequests' | translate}}</a></li>
+					<li  ui-sref-active="active"ng-hide="applicationCtrl.userInformation.jobRole == 'SAD'"><a ui-sref="reports.reportList" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.requestsByType' | translate}}</a></li>
+					<li  ui-sref-active="active"ng-if="applicationCtrl.userInformation.jobRole == 'SAD'||applicationCtrl.userInformation.jobRole == 'NAD' || applicationCtrl.userInformation.jobRole == 'RAD'"><a ui-sref="userMaintenance" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.userMaintenance' | translate}}</a></li>
+                    <li ui-sref-active="active" ng-hide="applicationCtrl.selectedRole == 'NAD' || applicationCtrl.selectedRole == 'RAD'"><a ui-sref="emailPreferences" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.emailPreferences' | translate}}</a></li>
+					<li ui-sref-active="active"><a ui-sref="help.helpList" ui-sref-opts="{reload: true, notify: true}">{{'application.navigation.links.help' | translate}}</a></li>
+
+				</ul>
+			</div>
+	</nav>
+</header>

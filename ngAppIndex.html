@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:ng="http://angularjs.org" id="ng-app"
+	ng-app="TfoamsUiApp"
+	ng-controller="ApplicationUIC as applicationCtrl">
+<head>
+<base href="" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0" />
+
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/select2/select2.css" />
+<link rel="stylesheet" href="bower_components/select2/select2-bootstrap.css" />
+
+<link rel="stylesheet" href="bower_components/ui-select-master/dist/select.css" />
+
+
+<link rel="stylesheet" href="webCore/assets/css/webcore.css" />
+<link rel="stylesheet" href="application/assets/css/app.css" />
+
+<link rel="shortcut icon" href="ford_icon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="ford_icon.ico">
+<meta name="msapplication-square150x150logo" content="ford_icon.ico">
+<meta name="msapplication-square70x70logo" content="ford_icon.ico">
+<meta name="msapplication-square310x310logo" content="ford_icon.ico">
+<meta name="msapplication-TileColor" content="#003e7d">
+
+<title>Technical Field Operations Assignment Management System</title>
+
+</head>
+<body>
+
+	<div loading-indicator></div>
+	<div id="header" class="bg-menu" ng-if="applicationCtrl.displayHeader" ng-include="'application/template/header.html'"></div>
+
+ 	<div id="content" class="container-fluid ng-cloak fade-in-up" ng-cloak ui-view autoscroll="true"></div>
+
+
+	<div id="footer" class="container-fluid" ng-include="'application/template/footer.html'"></div>
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/underscore/underscore.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+
+	<script src="bower_components/ui-select-master/dist/select.js"></script>
+	
+	 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/ngStorage/ngStorage.min.js"></script>
+	<script src="bower_components/angular-i18n/angular-locale_en-us.js"></script>
+	<script	src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-translate/angular-translate.js"></script>
+	<script	src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+	<script src="bower_components/restangular/dist/restangular.js"></script>
+	<script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+	<script src="bower_components/select2/select2.min.js"></script>
+	<script src="bower_components/angular-ui-select2/src/select2.js"></script>
+
+	
+	<script src="webCore/components/componentsModule.js"></script>
+	<script src="webCore/components/dataTables/dataTablesDirective.js"></script>
+	<script src="webCore/components/dataTables/dataTables.bootstrap.paging.js"></script>
+	<script src="webCore/services/servicesModule.js"></script>
+	<script src="webCore/overrides/restangularOverride.js"></script>
+	<script src="webCore/services/alertMessagingUIS.js"></script>
+	<script src="webCore/services/networkDataStateUIS.js"></script>
+	<script src="webCore/components/loadingIndicator/loadingIndicatorDirective.js"></script>
+	<script src="webCore/components/multipleEmails/multipleEmailsDirective.js"></script>
+	<script src="webCore/components/fileUpload/fileUploadDirective.js"></script>
+
+	<script src="application/applicationModule.js"></script>
+	<script src="application/applicationUIC.js"></script>
+
+
+
+	
+	
+	<script src="application/home/homeModule.js"></script>
+	<script src="application/login/loginUIC.js"></script>
+	<script src="application/home/homeUIC.js"></script>
+	<script src="application/userMaintenance/userMaintenanceUIC.js"></script>
+    <script src="application/createRequest/createRequestUIC.js"></script>
+    <script src="application/searchRequest/searchRequestUIC.js"></script>
+	<script src="application/reports/reportsUIC.js"></script>
+	<script src="application/emailPreferences/emailPreferencesUIC.js"></script>
+	<script src="application/help/helpUIC.js"></script>
+	<script src="application/unAuth/unAuthUIC.js"></script>
+	
+	
+	
+	<script src="application/components/componentsModule.js"></script>
+
+	<script src="application/components/services/servicesModule.js"></script>
+	<script src="application/components/services/userMaintenanceUIBF.js"></script>
+	<script src="application/components/services/authorizationUIBF.js"></script>
+	<script src="application/components/services/userUIBF.js"></script>
+	<script src="application/components/services/countryListUIBF.js"></script>
+	<script src="application/components/services/reportsUIBF.js"></script>
+	<script src="application/components/services/searchReqestUIBF.js"></script>
+	<script src="application/components/services/reportMasterDetailsModalServices.js"></script>
+	<script src="application/components/services/reportsServices.js"></script>
+	<script src="application/components/services/emailPreferencesUIBF.js"></script>
+	<script src="application/components/services/helpUIBF.js"></script>
+	<script src="application/components/services/userUIRM.js"></script>
+    <script src="application/components/services/createRequestUIBF.js"></script>
+    <script src="application/components/services/updateRequestUIBF.js"></script>
+    <script src="application/components/services/selectDealerUIBF.js"></script>
+    <script src="application/components/services/emailSummaryUIBF.js"></script>
+	<script src="application/components/services/unAuthUIBF.js"></script>
+	<script src="application/components/services/fileUploadUIBF.js"></script>
+
+    <script src="application/components/deleteUserModal/deleteUserModalInstanceUIC.js"></script>
+    <script src="application/components/deleteUserModal/deleteUserModalUIS.js"></script>
+    <script src="application/components/selectDealerModal/selectDealerModalInstanceUIC.js"></script>
+    <script src="application/components/selectDealerModal/selectDealerModalUIS.js"></script>
+    <script src="application/components/requestHistoryModal/requestHistoryModalInstanceUIC.js"></script>
+    <script src="application/components/requestHistoryModal/requestHistoryModalUIS.js"></script>
+    <script src="application/components/deleteRequestModal/deleteRequestModalInstanceUIC.js"></script>
+    <script src="application/components/deleteRequestModal/deleteRequestModalUIS.js"></script>
+    <script src="application/components/emailSummaryModal/emailSummaryModalInstanceUIC.js"></script>
+    <script src="application/components/emailSummaryModal/emailSummaryModalUIS.js"></script>
+    
+    <script src="application/components/validators/checker.js"></script>
+    <script src="application/components/validators/vinNumber.js"></script>
+    <script src="application/components/validators/hours.js"></script>
+    
+    <script src="application/components/filter/maxString.js"></script>
+    
+    
+
+    <script src="application/components/models/modelsModule.js"></script>
+	<script src="application/components/models/userMaintenanceUIM.js"></script>
+	<script src="application/components/models/emailPreferencesUIM.js"></script>
+    <script src="application/components/models/CreateRequestUIM.js"></script>
+
+
+</body>
+</html>

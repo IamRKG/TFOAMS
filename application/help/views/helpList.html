@@ -1,0 +1,19 @@
+<h2>{{'help.title' | translate}}</h2>
+    
+<p>{{'help.instructions' | translate}}</p>
+
+<div class="list-group">
+	<div class="h4" id="helpList" ng-repeat="help in helpCtrl.helpList">
+		<a ng-click="helpCtrl.openPDF(help.fileCode)"><span>{{help.name}}</span></a>
+	</div>
+</div>
+
+<h2>{{'help.title2' | translate}}</h2>
+    
+<div class="list-group">
+	<div class="h4" ng-repeat="contact in helpCtrl.contactList">
+		<span>{{contact.label}} &colon; </span><a ng-href="#/{{help.fileCode}}"><span>{{contact.name}}</span></a><span>{{contact.labelOR}}</span>
+	</div>
+</div>
+
+<p><span><b>{{'help.note' | translate}}</b> &colon; </span><span>{{'help.noteReadOnlyText' | translate}}</span></p>
